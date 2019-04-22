@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'demo'
+            keyPassword '123456'
+            storeFile file('D:/test/work.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        applicationId "com.example.pwd61.analysis"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //signingConfig signingConfigs.config
+            renderscriptDebuggable false
+            jniDebuggable false
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //signingConfig signingConfigs.config
+            renderscriptDebuggable true
+            jniDebuggable true
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "./src/main/cpp/CMakeLists.txt"
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        Emulator {
+            applicationIdSuffix ".emulator"
+            versionNameSuffix "-emulator"
+            dimension "version"
+            externalNativeBuild {
+                cmake {
+                    abiFilters 'x86'
+                    cppFlags "-frtti -fexceptions -D__i386__"
+                }
+            }
+        }
+        Spec_emu{
+            //针对虚拟机下进行armeabi-v7a的编译
+            applicationIdSuffix ".sepc_emu"
+            versionNameSuffix "-spec_emu"
+            dimension "version"
+            externalNativeBuild{
+                cmake{
+                    abiFilters 'armeabi-v7a'
+                    cppFlags "-frtti -fexceptions  "
+                }
+            }
+        }
+        RealPhone {
+            applicationIdSuffix ".realphone"
+            versionNameSuffix "-realphone"
+            externalNativeBuild {
+                cmake {
+                    abiFilters 'armeabi-v7a'
+                    cppFlags "-frtti -fexceptions "
+                }
+            }
+            dimension "version"
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/cpp/jniLibs']
+        }
+    }
+}
+
+dependencies {
+    compileOnly 'de.robv.android.xposed:api:82'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
