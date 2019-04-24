@@ -1,4 +1,3 @@
-
 #include <string>
 #include <cstdlib>
 #include <sys/system_properties.h>
@@ -11,51 +10,27 @@
 #include "Util.h"
 #include "native_bridge.h"
 #include "lua.hpp"
-#include "jd_utils.h"
+
 //#include <execinfo.h>
 
 static bool firstLoad = true;
 static bool isFirst = true;
 
-char *(*JIEMI)(void *a1, int offset);
+typedef int (*luaL_loadstring_def)(slua::lua_State *L, const char *s);
 
-slua::lua_CFunction fnc_call;
-
-typedef slua::lua_State *(*Lua_STATE_FUNC)();
-Lua_STATE_FUNC lua_state_func;
-
-typedef int (*luaL_loadbufferx_def)(slua::lua_State *L, const char *buff, size_t sz,
-                                    const char *name, const char *mode);
-luaL_loadbufferx_def lua_loadbuf_fnc;
-
-typedef int (*luaL_loadstring_def) (slua::lua_State *L, const char *s);
-luaL_loadstring_def  load_string;
+luaL_loadstring_def load_string;
 //
 slua::lua_State *g_luastate;
 
-HOOK_DEF(slua::lua_State*, luaL_newstate, void *a) {
 
-    g_luastate = orig_luaL_newstate(a);
-    LOGD("狀態機hook成功了哦,狀態機地址：%p", g_luastate);
-    return g_luastate;
-}
 
-HOOK_DEF(int, lua_loadbufer, slua::lua_State *L, const char *buff, size_t sz,
-         const char *name, const char *mode) {
-    char buffer[4096];
-    int j = snprintf(buffer, 4095, "%s\n", buff);
-    LOGD("LOAD BUFFER.num%d",j);
-    std::string tmp(buff);
-    faklog(tmp);
-    return orig_lua_loadbufer(L, buff, sz, name, mode);
-}
 
-HOOK_DEF(int,luaL_loadstring,slua::lua_State *L, const char *s)
-{
+
+HOOK_DEF(int, luaL_loadstring, slua::lua_State *L, const char *s) {
     //std::string tmpstr(s);
     //faklog(tmpstr);
-    write2file(s,"/sdcard/pubg.lua");
-    return orig_luaL_loadstring(L,s);
+    write2file(s, "/sdcard/pubg.lua");
+    return orig_luaL_loadstring(L, s);
 }
 
 void x86_spec() {
@@ -65,10 +40,10 @@ void x86_spec() {
         LOGD("dlopen: -->%s \n", dlerror());
         //exit(EXIT_FAILURE);
     } else {
-        //    dlerror();    /* Clear any existing error */
+        dlerror();    /* Clear any existing error */
         LOGD("load UE4 succ!! STEP into next stage!");
     }
-    dlerror();
+
     load_string = (luaL_loadstring_def) dlsym(handle, "luaL_loadstring");
     if ((error = dlerror()) != nullptr) {
         LOGD("dlsym: -->%s\n", error);
@@ -80,33 +55,8 @@ void x86_spec() {
                        (void *) new_luaL_loadstring,
                        (void **) &orig_luaL_loadstring);
     }
-    lua_state_func = (Lua_STATE_FUNC) dlsym(handle, "luaL_newstate");
-    if ((error = dlerror()) != nullptr) {
-        LOGD("dlsym: -->%s\n", error);
-        //exit(EXIT_FAILURE);
-    } else {
-        //dlerror();
-        LOGD("發現LUA狀態機!! STEP into next stage! HOOK iT");
-//        MSHookFunction(reinterpret_cast<void *>(lua_state_func),
-//                       (void *) new_luaL_newstate,
-//                       (void **) &orig_luaL_newstate);
-        LOGD("HOOK狀態機成功了！！！");
 
-    }
     dlerror();
-}
-
-
-HOOK_DEF(void*, dlsym, const char *symbol, void *handle, int a2) {
-    LOGD("the handle [0x%p] symbol name:%s", handle, symbol);
-    return orig_dlsym(symbol, handle, a2);
-}
-
-HOOK_DEF(void*, getTrampoline, void *handle, const char *name, const char *shorty, uint32_t len) {
-    LOGV("getTrampoline 跳板函数: %s", name);
-    void *ret = orig_getTrampoline(handle, name, shorty, len);
-    LOGV("enter native_bridge2_getTrampoline %s, trampoline_addr %p", name, ret);
-    return ret;
 }
 
 
@@ -120,16 +70,6 @@ void hookX86(void *handle) {
             LOGV("我日可以version : %d ,: %p ", cbks->version, cbks->getTrampoline);
         }
     }
-
-    ////dlsym_addr = get_remote_addr(getpid(), "/system/bin/linker", (void *) dlsym);
-    ////__dl__Z19dlsym_linear_lookupPKcPP6soinfoS2_ proc
-//    if (findSymbol("__dl__Z19dlsym_linear_lookupPKcPP6soinfoS2_", "linker",
-//                   (unsigned long *) &dlsym_addr) == 0) {
-//        if (dlsym_addr != nullptr) {
-//            LOGV("开始hook dl_sym");
-//            MSHookFunction(dlsym_addr, (void *) new_dlsym, (void **) &orig_dlsym);
-//       }
-//    }
 }
 
 void obtainClassName(JNIEnv *jniEnv, jclass clazz) {
@@ -200,16 +140,8 @@ HOOK_DEF(void*, JNI_OnLoad, void *javaVM) {
         firstLoad = false;
     }
     LOGD("RegisterNatives addr: %p", nativeInterface->RegisterNatives);
-    pthread_t tid;
-    pthread_create(&tid, nullptr, decryptMSG, nullptr);
-    return orig_JNI_OnLoad(javaVM);
-}
 
-HOOK_DEF(void *, jiemi, void *a1, int a2) {
-    LOGD("解密地址： %p-%x off: %d", a1, (uint32_t) a1 - (uint32_t) base, a2);
-    void *ret = orig_jiemi(a1, a2);
-    LOGD("jiemi: %s", reinterpret_cast<char *>(ret));
-    return ret;
+    return orig_JNI_OnLoad(javaVM);
 }
 
 
@@ -228,19 +160,6 @@ void onSoLoaded(const char *name, void *handle) {
         if (findSymbol("JNI_OnLoad", "libSecurity.so", (unsigned long *) &symbol) == 0 && isFirst) {
             LOGD("FIND JNI_ONLOAD FUCK IT ：%p", symbol);
             MSHookFunction(symbol, (void *) new_JNI_OnLoad, (void **) &orig_JNI_OnLoad);
-            symbol = nullptr;
-            base = get_module_base(getpid(), "libSecurity.so");
-            symbol = reinterpret_cast<void *>((uint32_t) base + 0x00003E4C + 1);
-            LOGD("libSecurity :%p jiemi :%p ", base, symbol);
-            *(void **) (&JIEMI) = symbol;
-            if (symbol != nullptr) {
-                //MSHookFunction(symbol, (void *) new_jiemi, (void **) &orig_jiemi);
-                LOGD("HOOK 加密函数");
-            }
-//            if (find_libbase(getpid(), name, (unsigned long *) &symbol) == SUC) {
-//                LOGD("FIND so:%s addr:%p", name, symbol);
-//            }
-            isFirst = false;
         }
     }
 }
@@ -288,10 +207,8 @@ void __attribute__((constructor)) init_so() {
     LOGD("into so hook module!!!");
     char abi[PATH_MAX] = "";
     __system_property_get("ro.product.cpu.abi", abi);
-    LOGD("SYTEM: %s", abi);
+    LOGD("SYTEM-API: %s", abi);
     if (strstr(abi, "x86") != nullptr) {
-        ////这里特殊化处理
-        LOGD("NOT SPECIAL!");
         x86_spec();
     } else {
         hook_main();

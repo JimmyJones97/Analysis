@@ -27,24 +27,7 @@ class JD_anatomy {
     static private String TAG = "HACK";
 
     static public void doHook(XC_LoadPackage.LoadPackageParam lpparam) {
-        findAndHookMethod("com.jd.verify.common.b.b", lpparam.classLoader,
-                "onPageStarted",
-                WebView.class,
-                String.class,
-                Bitmap.class,
-                new XC_MethodHook() {
-                    @Override
-                    protected void beforeHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
-                        super.beforeHookedMethod(param);
-                        Log.d(TAG, "WebView URL " + param.args[1]);
-                        //dumpStack();
-                    }
 
-                    @Override
-                    protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
-                        super.afterHookedMethod(param);
-                    }
-                });
 
         findAndHookMethod("com.jd.verify.common.b.b", lpparam.classLoader,
                 "onPageFinished",
@@ -168,7 +151,7 @@ class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         Log.d(TAG, "解密前--->：" + param.args[1] + "," + param.args[0]);
-                        //dumpStack();
+                        dumpStack();
                     }
 
                     @Override
@@ -211,7 +194,6 @@ class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         Log.d(TAG, "base 64 前--->：" + new String((byte[]) param.args[0]));
-
                         //FileUtils.writeFile(new String((byte[]) param.args[0]) + '\n', Environment.getExternalStorageDirectory().getPath() + "/orig.txt", true);
                         //dumpStack();
                     }
@@ -354,7 +336,7 @@ class JD_anatomy {
                         super.beforeHookedMethod(param);
                         //verify模塊的調試代碼
                         Log.d(TAG, "verify init str:" + param.args[0] + ",str2:" + param.args[2]);
-                        dumpStack();
+                        //dumpStack();
                     }
 
                     @Override
@@ -534,8 +516,8 @@ class JD_anatomy {
                         super.beforeHookedMethod(param);
                         Context ctx = (Context) param.args[0];
                         String classname = ctx.getApplicationContext().getApplicationInfo().className;
-                        Utils.Log("LoadDoor getToken before: " + classname);
-                        dumpStack();
+                        //Utils.Log("LoadDoor getToken before: " + classname);
+                        //dumpStack();
                     }
 
                     @Override
@@ -696,10 +678,68 @@ class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("登录报文解包:"+ConvJSON.putJSON("package",param.getResult()));
-                        //dumpStack();
+                        Utils.Log("登录报文解包:" + ConvJSON.putJSON("package", param.getResult()));
+                        dumpStack();
                     }
 
+
+                });
+        findAndHookMethod("jd.wjlogin_sdk.common.inland.WJLoginInland", lpparam.classLoader,
+                "sendMsgCodeForPhoneNumLogin4JD",
+                String.class,
+                String.class,
+                String.class,
+                String.class,
+                "jd.wjlogin_sdk.common.listener.OnDataCallback",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        Utils.Log("beforeHookedMethod: sendMsgCodeForPhoneNumLogin4JD: \n.str1:" +
+                                param.args[0] +
+                                ",str2:" + param.args[1] +
+                                "\nstr3:" + param.args[2] +
+                                "\nstr4:" + param.args[3]);
+                    }
+
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+                    }
+                });
+        findAndHookMethod("jd.wjlogin_sdk.common.inland.WJLoginInland", lpparam.classLoader,
+                "checkMsgCodeForPhoneNumLogin4JD",
+
+                String.class,
+                String.class,
+                String.class,
+                "jd.wjlogin_sdk.common.listener.OnCommonCallback",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        Utils.Log("beforeHookedMethod: checkMsgCodeForPhoneNumLogin4JD: \n.str1:" +
+                                param.args[0] +
+                                ",str2:" + param.args[1] +
+                                "\nstr3:" + param.args[2] );
+                    }
+
+                });
+        findAndHookMethod("jd.wjlogin_sdk.common.inland.WJLoginInland", lpparam.classLoader,
+                "checkHistory4JDPhoneNumLoginNew",
+                String.class,
+                String.class,
+                String.class,
+                "jd.wjlogin_sdk.common.listener.OnCommonCallback",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        Utils.Log("beforeHookedMethod: checkHistory4JDPhoneNumLoginNew: \n.str1:" +
+                                param.args[0] +
+                                ",str2:" + param.args[1] +
+                                "\nstr3:" + param.args[2] );
+                    }
 
                 });
 
@@ -709,6 +749,6 @@ class JD_anatomy {
         //動態加載
         Utils.Log("LOAD ourself so library!");
         //System.loadLibrary("native-lib");
-        System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative-lib.so");
+        //System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative-lib.so");
     }
 }

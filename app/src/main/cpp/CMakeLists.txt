@@ -3,7 +3,8 @@ project(native-lib)
 
 #子目录
 add_subdirectory(slua)
-
+add_subdirectory(debugger)
+add_subdirectory(memdump)
 #substrate源文件
 aux_source_directory(${PROJECT_SOURCE_DIR}/Substrate SUBSTATE_SRC)
 
@@ -43,6 +44,7 @@ add_library( # Sets the name of the library.
         # Provides a relative path to your source file(s).
         native-lib.cpp
         jd_utils.cpp
+
         Util.cpp
         ${SUBSTATE_SRC})
 
@@ -52,12 +54,42 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib}
         slua_mod
+
+        )
+
+
+add_library(pubg
+        SHARED
+        pubg.cpp
+        Util.cpp
+        ${SUBSTATE_SRC})
+target_link_libraries( # Specifies the target library.
+        pubg
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib}
+        slua_mod
+
+        )
+add_library(ilongyuan
+        SHARED
+        longyuan.cpp
+        Util.cpp
+        ${SUBSTATE_SRC})
+target_link_libraries( # Specifies the target library.
+        ilongyuan
+        # Links the target library to the log library
+        # included in the NDK.
+        ${log-lib}
+        slua_mod
+
         )
 target_compile_definitions(${PROJECT_NAME} PRIVATE CMAKE_EXPORT_COMPILE_COMMANDS=1)
 #target_include_directories(${PROJECT_NAME} PRIVATE )
 #GameProtector3
 add_executable(GameProtector3 ${PROJECT_SOURCE_DIR}/GameProtector3/main.cpp)
 add_executable(inside ${PROJECT_SOURCE_DIR}/linux_inside/execve.c)
+add_executable(waitpid_t ${PROJECT_SOURCE_DIR}/linux_inside/wait_pid.c)
 #test goal
 add_executable(fuckyu ${PROJECT_SOURCE_DIR}/exe/main.cpp)
 add_executable(myecho ${PROJECT_SOURCE_DIR}/myecho/myecho.c)

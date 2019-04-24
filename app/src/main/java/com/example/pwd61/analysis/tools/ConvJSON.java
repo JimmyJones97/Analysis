@@ -22,15 +22,9 @@ import java.util.Map.Entry;
  ***************************************************************************/
 public class ConvJSON {
 
-
-    private StringBuffer sf = null;
-
-
     private String SimpleObjectToJson(Object o) {
-
+        StringBuffer sf = null;
         sf = new StringBuffer("{");
-
-
         //sf.append(o.getClass().getSimpleName());
         Field field[] = o.getClass().getDeclaredFields();
         String content = "";
@@ -61,7 +55,7 @@ public class ConvJSON {
     @SuppressWarnings("unchecked")
     public Object convertJSON(Object o) {
         if (o == null) {
-            return "";
+            return "\"\"";
         } else if (o instanceof Boolean) {
             return "\"" + o.toString() + "\"";
         } else if (o instanceof Character) {
@@ -94,7 +88,8 @@ public class ConvJSON {
 
     @SuppressWarnings("unchecked")
     private String listToJSON(List list) {
-        sf = new StringBuffer("[");
+        StringBuffer
+                sf = new StringBuffer("[");
         for (int i = 0; i < list.size(); i++) {
             sf.append(convertJSON(list.get(i)) + ",");
         }
@@ -103,7 +98,7 @@ public class ConvJSON {
 
     @SuppressWarnings("unchecked")
     private String mapToJSON(Map map) {
-        sf = new StringBuffer("[");
+        StringBuffer sf = new StringBuffer("[");
         Iterator ite = map.entrySet().iterator();
         while (ite.hasNext()) {
             Entry o = (Entry) ite.next();
@@ -115,7 +110,7 @@ public class ConvJSON {
     }
 
     public String arrayToJSON(Object o) {
-        sf = new StringBuffer("[");
+        StringBuffer sf = new StringBuffer("[");
         Object[] obj = (Object[]) o;
         for (int i = 0; i < obj.length; i++) {
             sf.append(convertJSON(obj[i]) + ",");

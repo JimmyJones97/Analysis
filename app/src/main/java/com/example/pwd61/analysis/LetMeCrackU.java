@@ -15,9 +15,13 @@ public class LetMeCrackU implements IXposedHookLoadPackage {
         } else if (lpparam.packageName.equals("com.yixinjiang.goodbaba.app.presentation")) {
             Log.w(TAG, "handleLoadPackage: " + lpparam.packageName);
         } else if (lpparam.packageName.equals("com.tencent.tmgp.pubgmhd")) {
-            Log.w(TAG,"let explorer UE4");
+            Log.w(TAG, "let explorer UE4");
             pubg.doHook(lpparam);
-        } else {
+        } else if (lpparam.packageName.equals("com.ilongyuan.sdorica.longyuan")) {
+            Log.w(TAG, "let explorer ilongyuan");
+            ilongyuan.doHook(lpparam);
+        }
+        else {
             Log.w(TAG, "Load package:" + lpparam.packageName + ",process:" + lpparam.processName);
         }
     }
