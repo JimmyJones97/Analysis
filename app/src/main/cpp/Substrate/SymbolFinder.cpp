@@ -7,7 +7,7 @@
 #include <sys/mman.h>
 #include <cstring>
 #include "SymbolFinder.h"
-#include "Util.h"
+#include "utils/Util.h"
 
 /* memory map for libraries */
 #define MAX_NAME_LEN 256

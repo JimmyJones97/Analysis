@@ -5,6 +5,9 @@ project(native-lib)
 add_subdirectory(slua)
 add_subdirectory(debugger)
 add_subdirectory(memdump)
+add_subdirectory(meta_program)
+add_subdirectory(cmb)
+add_subdirectory(utils)
 #substrate源文件
 aux_source_directory(${PROJECT_SOURCE_DIR}/Substrate SUBSTATE_SRC)
 
@@ -13,7 +16,7 @@ file(GLOB SRC_TEST ${PROJECT_SOURCE_DIR}/Substrate/*.cpp)
 #头文件
 include_directories(
         ${PROJECT_SOURCE_DIR}
-        ${PROJECT_SOURCE_DIR}/lua
+
         ${PROJECT_SOURCE_DIR}/Substrate
 )
 
@@ -45,7 +48,7 @@ add_library( # Sets the name of the library.
         native-lib.cpp
         jd_utils.cpp
 
-        Util.cpp
+        #utils/Util.cpp
         ${SUBSTATE_SRC})
 
 target_link_libraries( # Specifies the target library.
@@ -54,14 +57,14 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib}
         slua_mod
-
+        Utils
         )
 
 
 add_library(pubg
         SHARED
         pubg.cpp
-        Util.cpp
+#        utils/Util.cpp
         ${SUBSTATE_SRC})
 target_link_libraries( # Specifies the target library.
         pubg
@@ -69,12 +72,12 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib}
         slua_mod
-
+        Utils
         )
 add_library(ilongyuan
         SHARED
         longyuan.cpp
-        Util.cpp
+        #utils/Util.cpp
         ${SUBSTATE_SRC})
 target_link_libraries( # Specifies the target library.
         ilongyuan
@@ -82,8 +85,12 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib}
         slua_mod
-
+        Utils
         )
+
+
+#add_library(cmb SHARED
+#        cmb/cmb.cpp)
 target_compile_definitions(${PROJECT_NAME} PRIVATE CMAKE_EXPORT_COMPILE_COMMANDS=1)
 #target_include_directories(${PROJECT_NAME} PRIVATE )
 #GameProtector3

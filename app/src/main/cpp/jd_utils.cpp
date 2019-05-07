@@ -3,7 +3,7 @@
 //
 #include <cstdint>
 #include <pthread.h>
-#include "Util.h"
+#include "utils/Util.h"
 #include "native-lib.h"
 #include "jd_utils.h"
 

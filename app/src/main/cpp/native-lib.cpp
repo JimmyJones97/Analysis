@@ -8,7 +8,7 @@
 #include <pthread.h>
 #include "native-lib.h"
 #include "SymbolFinder.h"
-#include "Util.h"
+#include "utils/Util.h"
 #include "native_bridge.h"
 #include "lua.hpp"
 #include "jd_utils.h"

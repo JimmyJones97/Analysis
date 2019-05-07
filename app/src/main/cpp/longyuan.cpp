@@ -7,7 +7,7 @@
 #include <pthread.h>
 #include "longyuan.h"
 #include "SymbolFinder.h"
-#include "Util.h"
+#include "utils/Util.h"
 #include "native_bridge.h"
 #include "lua.hpp"
 
@@ -24,7 +24,14 @@ waitpid_t waitpid_func;
 HOOK_DEF(void*,waitpid_addr,__pid_t a1,int a2)
 {
         LOGD("INTO ???????????????");
+//        kill();
+//        linux_eabi_syscall(__NR_kill,1,2);
         return orig_waitpid_addr(a1,a2);
+}
+
+void hookX86(void *)
+{
+    LOGD("NOTHING IN HERE");
 }
 
 void x86_spec() {
