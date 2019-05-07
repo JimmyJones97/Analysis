@@ -3,6 +3,11 @@ package com.example.pwd61.analysis.Detour;
 import android.util.Log;
 
 
+import com.example.pwd61.analysis.Detour.fuck.JD_anatomy;
+import com.example.pwd61.analysis.Detour.fuck.Zhaoshang;
+import com.example.pwd61.analysis.Detour.fuck.ilongyuan;
+import com.example.pwd61.analysis.Detour.fuck.pubg;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.*;
 
@@ -20,8 +25,10 @@ public class LetMeCrackU implements IXposedHookLoadPackage {
         } else if (lpparam.packageName.equals("com.ilongyuan.sdorica.longyuan")) {
             Log.w(TAG, "let explorer ilongyuan");
             ilongyuan.doHook(lpparam);
-        }
-        else {
+        } else if (lpparam.packageName.equals("cmb.pb")) {
+            Log.w(TAG, "let explorer 招商银行");
+            Zhaoshang.doHook(lpparam);
+        } else {
             Log.w(TAG, "Load package:" + lpparam.packageName + ",process:" + lpparam.processName);
         }
     }

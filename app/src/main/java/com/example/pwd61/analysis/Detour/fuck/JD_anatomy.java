@@ -1,4 +1,4 @@
-package com.example.pwd61.analysis.Detour;
+package com.example.pwd61.analysis.Detour.fuck;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.webkit.WebView;
 
-import com.example.pwd61.analysis.Detour.fuck.tester;
+import com.example.pwd61.analysis.Detour.verfiy.tester;
 import com.example.pwd61.analysis.Detour.tools.ConvJSON;
 import com.example.pwd61.analysis.Detour.tools.FileUtils;
 import com.example.pwd61.analysis.Detour.tools.Utils;
@@ -17,11 +17,10 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-import static com.example.pwd61.analysis.Detour.tools.Utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
-class JD_anatomy {
+public class JD_anatomy {
 
     static private String TAG = "HACK";
 
