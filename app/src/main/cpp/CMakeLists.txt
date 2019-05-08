@@ -8,6 +8,9 @@ add_subdirectory(memdump)
 add_subdirectory(meta_program)
 add_subdirectory(cmb)
 add_subdirectory(utils)
+add_subdirectory(Substrate)
+add_subdirectory(zlib123)
+add_subdirectory(minizip)
 #substrate源文件
 aux_source_directory(${PROJECT_SOURCE_DIR}/Substrate SUBSTATE_SRC)
 
@@ -56,7 +59,7 @@ target_link_libraries( # Specifies the target library.
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}
-        slua_mod
+        slua
         Utils
         )
 
@@ -71,21 +74,23 @@ target_link_libraries( # Specifies the target library.
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}
-        slua_mod
+        slua
         Utils
         )
 add_library(ilongyuan
         SHARED
         longyuan.cpp
         #utils/Util.cpp
-        ${SUBSTATE_SRC})
+        #${SUBSTATE_SRC}
+        )
 target_link_libraries( # Specifies the target library.
         ilongyuan
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}
-        slua_mod
+        slua
         Utils
+        Substrate
         )
 
 

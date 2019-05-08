@@ -2,17 +2,20 @@
 // Created by pwd61 on 2019/5/7.
 //
 
-#include <unistd.h>
+
+#include <SubstrateHook.h>
+#include <SymbolFinder.h>
 #include "cmb.hpp"
 #include "cmb_main.hpp"
 #include "Util.h"
 
 
+
 void  init_entry()__attribute__((constructor))
 {
     int v19,v18,v14=0,v15;
-    //v19 = get_so_addr("/system/lib/libart.so");
-    v19=(int)get_module_base(-1,"libart");
+    v19 = get_so_addr("/system/lib/libart.so");
+    //v19=(int)get_module_base(-1,"libart");
     LOGS("2g.debug", "loadbuf = %x", v19);
     v18 = *(int32_t *)(v19 + 28) + v19;
 

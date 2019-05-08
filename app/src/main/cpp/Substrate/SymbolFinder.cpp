@@ -1,13 +1,13 @@
-#include <stdio.h>
+#include <cstdio>
 #include <elf.h>
 
 #include <malloc.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <cstring>
 #include "SymbolFinder.h"
-#include "utils/Util.h"
+#include <Util.h>
 
 /* memory map for libraries */
 #define MAX_NAME_LEN 256
@@ -306,7 +306,7 @@ static int load_memmap(pid_t pid, struct mm *mm, int *nmmp) {
     return 0;
 }
 
-/* Find libc in MM, storing no more than LEN-1 chars of
+/*** Find libc in MM, storing no more than LEN-1 chars of
  its name in NAME and set START to its starting
  address.  If libc cannot be found return -1 and
  leave NAME and START untouched.  Otherwise return 0

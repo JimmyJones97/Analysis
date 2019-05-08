@@ -1,4 +1,4 @@
-project(slua_mod)
+project(slua)
 
 file(GLOB SRC_LUA ${PROJECT_SOURCE_DIR}/lua/*.cpp)
 file(GLOB SRC_LUASOCKET ${PROJECT_SOURCE_DIR}/luasocket/*.cpp)
