@@ -80,7 +80,7 @@ android {
     }
     sourceSets {
         main {
-            jniLibs.srcDirs = ['src/main/cpp/jniLibs']
+            jniLibs.srcDirs = ['libs']
         }
     }
 }

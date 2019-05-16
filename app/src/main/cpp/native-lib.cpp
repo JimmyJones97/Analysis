@@ -13,6 +13,9 @@
 #include "lua.hpp"
 #include "jd_utils.h"
 //#include <execinfo.h>
+#include <linux/watchdog.h>
+//#include <android-base/logging.h>
+
 
 static bool firstLoad = true;
 static bool isFirst = true;

@@ -9,8 +9,13 @@ add_subdirectory(meta_program)
 add_subdirectory(cmb)
 add_subdirectory(utils)
 add_subdirectory(Substrate)
-add_subdirectory(zlib123)
-add_subdirectory(minizip)
+#add_subdirectory(zlib123)
+#add_subdirectory(minizip)
+
+add_subdirectory(whale)
+#add_subdirectory(fileless_so)
+#add_subdirectory(curl)
+#add_subdirectory(openssl)
 #substrate源文件
 aux_source_directory(${PROJECT_SOURCE_DIR}/Substrate SUBSTATE_SRC)
 
@@ -43,6 +48,9 @@ find_library( # Sets the name of the path variable.
         # you want CMake to locate.
         log)
 #
+#find_library(cutils-lib
+#        cutils
+#        )
 add_library( # Sets the name of the library.
         native-lib
         # Sets the library as a shared library.
