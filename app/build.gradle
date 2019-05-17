@@ -62,6 +62,7 @@ android {
                 cmake{
                     abiFilters 'armeabi-v7a'
                     cppFlags "-frtti -fexceptions  "
+                    //arguments "-DANDROID_STL=system"
 
                 }
             }
@@ -83,6 +84,8 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+    useLibrary 'org.apache.http.legacy'
+
 }
 
 dependencies {

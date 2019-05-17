@@ -9,6 +9,7 @@ add_subdirectory(meta_program)
 add_subdirectory(cmb)
 add_subdirectory(utils)
 add_subdirectory(Substrate)
+#add_subdirectory(HackLib)
 #add_subdirectory(zlib123)
 #add_subdirectory(minizip)
 
