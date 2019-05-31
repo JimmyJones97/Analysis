@@ -5,10 +5,10 @@
 #include <memory>
 #include <dlfcn.h>
 #include <pthread.h>
-#include "native-lib.h"
+#include "jd/native-lib.h"
 #include "SymbolFinder.h"
 #include "utils/Util.h"
-#include "native_bridge.h"
+#include "jd/native_bridge.h"
 #include "lua.hpp"
 
 //#include <execinfo.h>

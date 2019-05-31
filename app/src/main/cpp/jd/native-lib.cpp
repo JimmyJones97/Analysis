@@ -6,12 +6,12 @@
 #include <memory>
 #include <dlfcn.h>
 #include <pthread.h>
-#include "native-lib.h"
+#include "jd/native-lib.h"
 #include "SymbolFinder.h"
 #include "utils/Util.h"
 #include "native_bridge.h"
 #include "lua.hpp"
-#include "jd_utils.h"
+#include "jd/jd_utils.h"
 //#include <execinfo.h>
 #include <linux/watchdog.h>
 //#include <android-base/logging.h>

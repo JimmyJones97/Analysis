@@ -8,7 +8,7 @@
 #include "longyuan.h"
 #include "SymbolFinder.h"
 #include "utils/Util.h"
-#include "native_bridge.h"
+#include "jd/native_bridge.h"
 #include "lua.hpp"
 
 //#include <execinfo.h>

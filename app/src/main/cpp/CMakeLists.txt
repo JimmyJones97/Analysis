@@ -25,7 +25,6 @@ file(GLOB SRC_TEST ${PROJECT_SOURCE_DIR}/Substrate/*.cpp)
 #头文件
 include_directories(
         ${PROJECT_SOURCE_DIR}
-
         ${PROJECT_SOURCE_DIR}/Substrate
 )
 
@@ -57,8 +56,8 @@ add_library( # Sets the name of the library.
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
-        native-lib.cpp
-        jd_utils.cpp
+        jd/native-lib.cpp
+        jd/jd_utils.cpp
 
         #utils/Util.cpp
         ${SUBSTATE_SRC})
@@ -72,10 +71,9 @@ target_link_libraries( # Specifies the target library.
         Utils
         )
 
-
 add_library(pubg
         SHARED
-        pubg.cpp
+        pubg/pubg.cpp
 #        utils/Util.cpp
         ${SUBSTATE_SRC})
 target_link_libraries( # Specifies the target library.
@@ -88,7 +86,7 @@ target_link_libraries( # Specifies the target library.
         )
 add_library(ilongyuan
         SHARED
-        longyuan.cpp
+        wxww/longyuan.cpp
         #utils/Util.cpp
         #${SUBSTATE_SRC}
         )
@@ -118,3 +116,9 @@ add_executable(myecho ${PROJECT_SOURCE_DIR}/myecho/myecho.c)
 #check attributes
 message(STATUS "构建版本:${CMAKE_BUILD_TYPE}")
 message(STATUS "源码:${SRC_LIST}\n ,${CMAKE_CXX_FLAGS} ")
+function(do_test msg)
+    message(WARNING ${msg})
+endfunction(do_test)
+
+do_test("fuck ")
+do_test(" thanks god")
