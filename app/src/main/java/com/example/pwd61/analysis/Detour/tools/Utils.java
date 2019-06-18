@@ -41,6 +41,6 @@ public class Utils {
             }
         }
         sb.append("\nDump Stack: " + "---------------over----------------");
-        Log.i("Dump Stack: ", sb.toString());
+        Log.i("Dump Stack ", sb.toString());
     }
 }

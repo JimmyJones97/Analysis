@@ -7,6 +7,7 @@ import com.example.pwd61.analysis.Detour.NetKnife.monitor;
 import com.example.pwd61.analysis.Detour.fuck.JD_anatomy;
 import com.example.pwd61.analysis.Detour.fuck.Zhaoshang;
 import com.example.pwd61.analysis.Detour.fuck.ilongyuan;
+import com.example.pwd61.analysis.Detour.fuck.neteaseMail;
 import com.example.pwd61.analysis.Detour.fuck.pubg;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -31,6 +32,9 @@ public class LetMeCrackU implements IXposedHookLoadPackage {
             Log.w(TAG, "let explorer 招商银行");
             //Zhaoshang.doHook(lpparam);
             monitor.doHook(lpparam);
+        } else if (lpparam.packageName.equals("com.netease.mail")) {
+            Log.w(TAG, "let explorer 网易邮箱");
+            neteaseMail.doHook(lpparam);
         } else {
             Log.w(TAG, "Load package:" + lpparam.packageName + ",process:" + lpparam.processName);
         }

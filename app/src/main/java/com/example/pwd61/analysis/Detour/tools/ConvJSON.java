@@ -3,10 +3,12 @@ package com.example.pwd61.analysis.Detour.tools;
 
 import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**************************************************************************
  * project:FuckJD
@@ -14,7 +16,7 @@ import java.util.Map.Entry;
  * file:ConvJSON
  * Created by pwd61 on 2019/4/1 18:35
  * description:
- *
+ * 将万物转换城json
  *
  *
  *
@@ -74,6 +76,8 @@ public class ConvJSON {
             return "\"" + o.toString() + "\"";
         } else if (o instanceof List) {
             return listToJSON((List) o);
+        } else if (o instanceof Set) {
+            return HashSetToJSON((HashSet) o);
         } else if (o instanceof Map) {
             return mapToJSON((Map) o);
         } else if (o.getClass().isArray()) {
@@ -92,6 +96,18 @@ public class ConvJSON {
                 sf = new StringBuffer("[");
         for (int i = 0; i < list.size(); i++) {
             sf.append(convertJSON(list.get(i)) + ",");
+        }
+        return sf.toString().substring(0, sf.toString().length() - 1) + "]";
+    }
+
+    @SuppressWarnings("unchecked")
+    private String HashSetToJSON(HashSet<?> set) {
+        StringBuffer
+                sf = new StringBuffer("[");
+        Iterator<?> iterator = set.iterator();
+        while (iterator.hasNext()) {
+//            System.out.print(iterator.next() + " ");
+            sf.append(convertJSON(iterator.next()) + ",");
         }
         return sf.toString().substring(0, sf.toString().length() - 1) + "]";
     }
