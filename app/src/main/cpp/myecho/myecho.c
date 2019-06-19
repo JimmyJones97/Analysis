@@ -5,37 +5,54 @@
 #include <time.h>
 #include <string.h>
 
+int sub_F658(int result, int a2, char a3);
+
 int main(int argc, char *argv[]) {
-    int j;
-
-    //for (j = 0; j < argc; j++)
-    //    printf("argv[%d]: %s\n", j, argv[j]);
-    unsigned int index; // r0
-    unsigned int v4; // r4
-    char v6[16]; // [sp+0h] [bp-78h]
-    int v7; // [sp+4h] [bp-74h]
-    int v8; // [sp+8h] [bp-70h]
-    int v9; // [sp+Ch] [bp-6Ch]
-    char v10; // [sp+10h] [bp-68h]
-    char alph[62]; // [sp+14h] [bp-64h]
-    time_t v2;
-    strcpy(alph, "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
-    //memset(v6, NULL,16);
-    v7 = 0;
-    v8 = 0;
-    v9 = 0;
-    v10 = 0;
-    v2 = time(0);///seed
-    srand48(v2);///rand generate
-    //v4 = (char *) v6;
-    v4 = 0;
-    for (int i = 0; i < 16; ++i) {
-        index = lrand48() / 0x2108421u;
-        v6[i] = alph[index];
-        //++v4;
-    }
+    char *s = (char *) malloc(19u);
+    memset(s, 0, 19u);//
+    sub_F658((int) s, 16, 250);
 
 
-    printf("gen :%s,%d\n", v6, strlen(v6));
     exit(EXIT_SUCCESS);
+}
+
+
+int sub_F658(int result, int a2, char a3) {
+    int v3; // r4
+    char v4; // r5
+    signed int v5; // r3
+
+    v5 = 0;
+    def_F668:
+    while (v5 != 5) {
+        while (2) {
+            switch (v5) {
+                case 0:
+                    v3 = 0;
+                    v4 = *(char *) (result + 1) ^ a3;
+                    goto LABEL_12;
+                case 1:
+                    *(char *) (result + v3) = 0;
+                    return result;
+                case 2:
+                    *(char *) (result + v3) = *(char *) (result + v3 + 2) ^ v4;
+                    v5 = 4;
+                    continue;
+                case 3:
+                    if (v3 >= a2)
+                        v5 = 1;
+                    else
+                        v5 = 2;
+                    goto def_F668;
+                case 4:
+                    ++v3;
+                LABEL_12:
+                    v5 = 3;
+                    continue;
+                default:
+                    goto def_F668;
+            }
+        }
+    }
+    return result;
 }
