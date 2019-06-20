@@ -1,4 +1,4 @@
-package com.example.pwd61.analysis.Detour.WatchDog;
+package com.example.pwd61.analysis.WatchDog;
 
 import android.content.Context;
 import android.os.Handler;
@@ -17,8 +17,8 @@ import java.net.Socket;
 import java.util.Random;
 
 
-import static com.example.pwd61.analysis.Detour.tools.MyLog.LogEx;
-import static com.example.pwd61.analysis.Detour.tools.encrypt.MD5_str;
+import static com.example.pwd61.analysis.Detour.Utils.MyLog.LogEx;
+import static com.example.pwd61.analysis.Detour.Utils.encrypt.MD5_str;
 
 /**************************************************************************
  * project:Analysis

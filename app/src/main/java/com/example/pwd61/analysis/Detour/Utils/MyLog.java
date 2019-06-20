@@ -1,11 +1,11 @@
-package com.example.pwd61.analysis.Detour.tools;
+package com.example.pwd61.analysis.Detour.Utils;
 
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.pwd61.analysis.Detour.WatchDog.GlobalVar;
-import com.example.pwd61.analysis.Detour.WatchDog.InfoHelper;
+import com.example.pwd61.analysis.WatchDog.GlobalVar;
+import com.example.pwd61.analysis.WatchDog.InfoHelper;
 
 import java.io.BufferedReader;
 import java.io.File;

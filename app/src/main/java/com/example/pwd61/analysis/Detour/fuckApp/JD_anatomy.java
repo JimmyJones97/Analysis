@@ -1,4 +1,4 @@
-package com.example.pwd61.analysis.Detour.fuck;
+package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,10 +6,13 @@ import android.os.Environment;
 import android.util.Log;
 import android.webkit.WebView;
 
+import com.alibaba.fastjson.JSON;
 import com.example.pwd61.analysis.Detour.verfiy.tester;
-import com.example.pwd61.analysis.Detour.tools.ConvJSON;
-import com.example.pwd61.analysis.Detour.tools.FileUtils;
-import com.example.pwd61.analysis.Detour.tools.Utils;
+import com.example.pwd61.analysis.Detour.Utils.ConvJSON;
+import com.example.pwd61.analysis.Detour.Utils.FileUtils;
+import com.example.pwd61.analysis.Detour.Utils.Utils;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -17,6 +20,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
+import static com.example.pwd61.analysis.Detour.Utils.Utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
@@ -24,6 +28,7 @@ public class JD_anatomy {
 
     static private String TAG = "HACK";
     static private boolean isFirstLoad = true;
+
     static public void doHook(XC_LoadPackage.LoadPackageParam lpparam) {
 
         findAndHookMethod("java.lang.Runtime", lpparam.classLoader, "loadLibrary", String.class, ClassLoader.class, new XC_MethodHook() {
@@ -161,7 +166,7 @@ public class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         Log.d(TAG, "解密前--->：" + param.args[1] + "," + param.args[0]);
-                        Utils.dumpStack();
+                        dumpStack();
                     }
 
                     @Override
@@ -184,7 +189,7 @@ public class JD_anatomy {
                         Log.d(TAG, "加密前--->：" + new String((byte[]) param.args[0]) + "," + param.args[1]);
                         //Log.d(TAG, "加密堆棧:");
                         FileUtils.writeFile(new String((byte[]) param.args[0]) + '\n', Environment.getExternalStorageDirectory().getPath() + "/orig.txt", true);
-                        Utils.dumpStack();
+                        dumpStack();
                     }
 
                     @Override
@@ -507,7 +512,7 @@ public class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         Utils.Log("LoadDoor enc before: " + param.args[0]);
-                        Utils.dumpStack();
+                        dumpStack();
                     }
 
                     @Override
@@ -561,7 +566,7 @@ public class JD_anatomy {
                                 + "-:" + sArray[2]
                                 + "-:" + sArray[3]
                         );
-                        Utils.dumpStack();
+                        dumpStack();
                     }
 
                     @Override
@@ -581,7 +586,7 @@ public class JD_anatomy {
                         super.beforeHookedMethod(param);
 
                         Utils.Log("startAnimation before: ");
-                        Utils.dumpStack();
+                        dumpStack();
                     }
 
                     @Override
@@ -689,7 +694,7 @@ public class JD_anatomy {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         Utils.Log("登录报文解包:" + ConvJSON.putJSON("package", param.getResult()));
-                        Utils.dumpStack();
+                        dumpStack();
                     }
 
 
@@ -761,6 +766,54 @@ public class JD_anatomy {
                         Utils.Log("beforeHookedMethod: getSalt:  str1:" + new String((byte[]) param.getResult()));
                     }
 
+                });
+        findAndHookMethod("com.jingdong.common.entity.UserAddress", lpparam.classLoader,
+                "toString",
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+                        Utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.getResult());
+                    }
+
+                });
+        findAndHookMethod("com.jingdong.common.entity.UserAddress", lpparam.classLoader,
+                "parser",
+                JSONObject.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        JSONObject jsonObject = (JSONObject) param.args[0];
+                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+                    }
+                });
+
+        findAndHookMethod("com.jingdong.common.entity.UserInfo", lpparam.classLoader,
+                "parser",
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+//                        JSONObject jsonObject = (JSONObject) param.args[0];
+//                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+                        Utils.Log("beforeHookedMethod: toString:  str1:" +(String)param.args[0]);
+                    }
+                });
+        findAndHookMethod(" jd.wjlogin_sdk.util.y", lpparam.classLoader,
+                "b",
+                String.class,
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+//                        JSONObject jsonObject = (JSONObject) param.args[0];
+//                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+                        dumpStack();
+                        Utils.Log("beforeHookedMethod: toString:  str1:" +(String)param.args[0]+(String)param.args[1]);
+                    }
                 });
 
     }

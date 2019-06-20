@@ -3,12 +3,11 @@ package com.example.pwd61.analysis.Detour;
 import android.util.Log;
 
 
-import com.example.pwd61.analysis.Detour.NetKnife.monitor;
-import com.example.pwd61.analysis.Detour.fuck.JD_anatomy;
-import com.example.pwd61.analysis.Detour.fuck.Zhaoshang;
-import com.example.pwd61.analysis.Detour.fuck.ilongyuan;
-import com.example.pwd61.analysis.Detour.fuck.neteaseMail;
-import com.example.pwd61.analysis.Detour.fuck.pubg;
+import com.example.pwd61.analysis.Detour.NetTools.monitor;
+import com.example.pwd61.analysis.Detour.fuckApp.JD_anatomy;
+import com.example.pwd61.analysis.Detour.fuckApp.ilongyuan;
+import com.example.pwd61.analysis.Detour.fuckApp.neteaseMail;
+import com.example.pwd61.analysis.Detour.fuckApp.pubg;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.*;

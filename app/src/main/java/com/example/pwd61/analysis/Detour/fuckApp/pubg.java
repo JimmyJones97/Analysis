@@ -1,17 +1,21 @@
-package com.example.pwd61.analysis.Detour.fuck;
+package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.util.Log;
+
+import com.example.pwd61.analysis.Detour.Utils.Utils;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
+
+
 /**************************************************************************
  * project:Analysis
  * Email: 
- * file:ilongyuan
- * Created by pwd61 on 2019/4/23 19:20
+ * file:pubg
+ * Created by pwd61 on 2019/4/16 17:52
  * description:
  *
  *
@@ -19,11 +23,9 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
  *
  *
  ***************************************************************************/
-public class ilongyuan {
-
-    static private String TAG = "LONGYUAN";
-    static boolean isFirstLoad = true;
-
+public class pubg {
+    static private String TAG = "PUBG";
+    static boolean isFirstLoad=true;
     static public void doHook(XC_LoadPackage.LoadPackageParam lpparam) {
         /**
          * 挂钩在java.lang.Runtime中loadLibrary（）。
@@ -34,9 +36,10 @@ public class ilongyuan {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 String libname = (String) param.args[0];
                 Log.d(TAG, "Loading of library--> lib" + libname + ".so after.");
-                if (libname.equals("DexHelper") && isFirstLoad) {
-                    System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libilongyuan.so");
-                    isFirstLoad = false;
+                if(libname.equals("UE4")&&isFirstLoad) {
+                    System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative-lib.so");
+                    isFirstLoad=false;
+                    Utils.dumpStack();
                 }
             }
         });

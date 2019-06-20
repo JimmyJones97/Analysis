@@ -1,11 +1,11 @@
-package com.example.pwd61.analysis.Detour.fuck;
+package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.util.Log;
-import com.example.pwd61.analysis.Detour.tools.Utils;
+import com.example.pwd61.analysis.Detour.Utils.Utils;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import static com.example.pwd61.analysis.Detour.tools.Utils.dumpStack;
+import static com.example.pwd61.analysis.Detour.Utils.Utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class neteaseMail {
