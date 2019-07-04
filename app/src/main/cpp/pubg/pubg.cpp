@@ -169,9 +169,12 @@ int findSymbol(const char *name, const char *libn,
     return find_name(getpid(), name, libn, addr);
 }
 
-HOOK_DEF(int, dlopen_28, char *a1, int a2, long *a3, unsigned int a4) {
-    LOGD("dlopen_28: %s %d  %p  %d", a1, a2, a3, a4);
-    return orig_dlopen_28(a1, a2, a3, a4);
+HOOK_DEF(void*, do_dlopen_V28, const char *name, int flags, const void *extinfo,
+         void *caller_addr) {
+    LOGD("dlopen_28: %s %d  %p  %p", name, flags, extinfo, caller_addr);
+    void *ret = orig_do_dlopen_V28(name, flags, extinfo, caller_addr);
+    onSoLoaded(name, ret);
+    return orig_do_dlopen_V28(name,flags,extinfo,caller_addr);
 }
 
 void hook_dlopen(int api_level) {
@@ -184,12 +187,12 @@ void hook_dlopen(int api_level) {
             MSHookFunction(symbol, (void *) new_do_dlopen_V23,
                            (void **) &orig_do_dlopen_V23);
         }
-    } else if (api_level >= 28) {
+    } else if (api_level >= ANDROID_P) {
         //// 这段代码没有鸡巴用。所以以后用吧的，我操；
         LOGV("ANDROID 9.0");
         if (findSymbol("__dl__Z9do_dlopenPKciPK17android_dlextinfoPKv", "linker",
                        (unsigned long *) &symbol) == 0) {
-            MSHookFunction(symbol, (void *) new_dlopen_28, (void **) &orig_dlopen_28);
+            MSHookFunction(symbol, (void *) new_do_dlopen_V28, (void **) &orig_do_dlopen_V28);
         }
     } else {
         LOGD("NOT suport OS-api:%d", api_level);

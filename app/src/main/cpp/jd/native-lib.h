@@ -4,6 +4,7 @@
 #include <jni.h>
 
 #define ANDROID_M 23
+#define ANDROID_P 28
 
 enum RET_TYE {
     SUC = 0,
