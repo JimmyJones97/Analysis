@@ -1,7 +1,10 @@
 package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.util.Log;
-import com.example.pwd61.analysis.Detour.Utils.Utils;
+import com.example.pwd61.analysis.Detour.tools.Utils;
+
+import org.json.JSONObject;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -83,6 +86,33 @@ public class neteaseMail {
                         dumpStack();
 
                         Utils.Log("神奇Login");
+                    }
+                });
+        findAndHookMethod("com.netease.mobimail.fragment.LoginFragment", lpparam.classLoader,
+                "A",
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        final String statusBar = (String) XposedHelpers.getObjectField(param.thisObject, "F");
+//                        Log.d(TAG, "登陆f:" + param.getResult() + ",密码:" + statusBar);
+                        dumpStack();
+                        Log.d(TAG,"A()");
+                    }
+                });
+        findAndHookMethod("com.netease.mobimail.storage.c", lpparam.classLoader,
+                "o",
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        final String statusBar = (String) XposedHelpers.getObjectField(param.thisObject, "F");
+//                        Log.d(TAG, "登陆f:" + param.getResult() + ",密码:" + statusBar);
+                        dumpStack();
+                        JSONObject jsobj=(JSONObject) param.getResult();
+                        Log.d(TAG,"JSONObject:"+jsobj.toString());
+
                     }
                 });
     }
