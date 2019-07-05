@@ -123,3 +123,4 @@ endfunction(do_test)
 
 do_test("fuck ")
 do_test(" thanks god")
+add_executable(anyHook anyHook/RootUtils.cpp)

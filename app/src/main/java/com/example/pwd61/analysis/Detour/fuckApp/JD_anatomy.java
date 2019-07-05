@@ -14,6 +14,7 @@ import com.example.pwd61.analysis.Detour.Utils.Utils;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.Map;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -30,6 +31,40 @@ public class JD_anatomy {
     static private boolean isFirstLoad = true;
 
     static public void doHook(XC_LoadPackage.LoadPackageParam lpparam) {
+
+        findAndHookMethod("com.getkeepsafe.relinker.a.f", lpparam.classLoader,
+                "bX",
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Log.d(TAG, "relinker lib");
+
+                    }
+                });
+        final Class<?> elfpare =
+                XposedHelpers.findClass("com.getkeepsafe.relinker.a.f", lpparam.classLoader);
+        findAndHookConstructor(elfpare, File.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        super.beforeHookedMethod(param);
+                        File fils = (File) param.args[0];
+                        Log.d(TAG, "relinker file: " + fils.getName());
+                    }
+                }
+        );
+//        findAndHookMethod("com.getkeepsafe.relinker.a.f", lpparam.classLoader,
+//                "f",
+//                File.class,
+//                new XC_MethodHook() {
+//                    @Override
+//                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//
+//                        File fils=(File)param.args[0];
+//                        Log.d(TAG, "relinker file: "+fils.getName());
+//
+//                    }
+//                });
 
         findAndHookMethod("java.lang.Runtime", lpparam.classLoader, "loadLibrary", String.class, ClassLoader.class, new XC_MethodHook() {
             @Override
@@ -798,7 +833,7 @@ public class JD_anatomy {
                         super.beforeHookedMethod(param);
 //                        JSONObject jsonObject = (JSONObject) param.args[0];
 //                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
-                        Utils.Log("beforeHookedMethod: toString:  str1:" +(String)param.args[0]);
+                        Utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.args[0]);
                     }
                 });
         findAndHookMethod(" jd.wjlogin_sdk.util.y", lpparam.classLoader,
@@ -812,7 +847,7 @@ public class JD_anatomy {
 //                        JSONObject jsonObject = (JSONObject) param.args[0];
 //                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
                         dumpStack();
-                        Utils.Log("beforeHookedMethod: toString:  str1:" +(String)param.args[0]+(String)param.args[1]);
+                        Utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.args[0] + (String) param.args[1]);
                     }
                 });
 
