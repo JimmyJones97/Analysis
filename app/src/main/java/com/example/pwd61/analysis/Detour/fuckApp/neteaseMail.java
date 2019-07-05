@@ -1,7 +1,9 @@
 package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.util.Log;
-import com.example.pwd61.analysis.Detour.tools.Utils;
+
+
+import com.example.pwd61.analysis.Detour.Utils.Utils;
 
 import org.json.JSONObject;
 
