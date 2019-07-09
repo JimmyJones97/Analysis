@@ -1,4 +1,4 @@
-package com.example.pwd61.analysis.Detour.Utils;
+package com.example.pwd61.analysis.Utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

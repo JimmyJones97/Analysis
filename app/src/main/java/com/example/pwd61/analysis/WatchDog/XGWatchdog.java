@@ -17,8 +17,8 @@ import java.net.Socket;
 import java.util.Random;
 
 
-import static com.example.pwd61.analysis.Detour.Utils.MyLog.LogEx;
-import static com.example.pwd61.analysis.Detour.Utils.encrypt.MD5_str;
+import static com.example.pwd61.analysis.Utils.MyLog.LogEx;
+import static com.example.pwd61.analysis.Utils.encrypt.MD5_str;
 
 /**************************************************************************
  * project:Analysis

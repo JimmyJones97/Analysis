@@ -6,11 +6,10 @@ import android.os.Environment;
 import android.util.Log;
 import android.webkit.WebView;
 
-import com.alibaba.fastjson.JSON;
 import com.example.pwd61.analysis.Detour.verfiy.tester;
-import com.example.pwd61.analysis.Detour.Utils.ConvJSON;
-import com.example.pwd61.analysis.Detour.Utils.FileUtils;
-import com.example.pwd61.analysis.Detour.Utils.Utils;
+import com.example.pwd61.analysis.Utils.ConvJSON;
+import com.example.pwd61.analysis.Utils.FileUtils;
+import com.example.pwd61.analysis.Utils.Utils;
 
 import org.json.JSONObject;
 
@@ -21,7 +20,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-import static com.example.pwd61.analysis.Detour.Utils.Utils.dumpStack;
+import static com.example.pwd61.analysis.Utils.Utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 

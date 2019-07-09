@@ -1,6 +1,6 @@
 package com.example.pwd61.analysis.WatchDog;
 
-import com.example.pwd61.analysis.Detour.Utils.MyLog;
+import com.example.pwd61.analysis.Utils.MyLog;
 
 /**************************************************************************
  * project:Analysis
