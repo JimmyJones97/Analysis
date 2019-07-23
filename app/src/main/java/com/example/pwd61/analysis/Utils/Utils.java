@@ -15,8 +15,26 @@ import android.util.Log;
  *
  ***************************************************************************/
 public class Utils {
-    //超级长的日志打印工具
+
+    /**
+     * 超级长的日志打印工具
+     * @param veryLongString 输入串
+     */
     public static void Log(String veryLongString) {
+        int maxLogSize = 1000;
+        for (int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+            int start = i * maxLogSize;
+            int end = (i + 1) * maxLogSize;
+            end = end > veryLongString.length() ? veryLongString.length() : end;
+            Log.d("HACK", veryLongString.substring(start, end));
+        }
+    }
+
+    /**
+     * d
+     * @param veryLongString debug
+     */
+    public static void Logd(String veryLongString) {
         int maxLogSize = 1000;
         for (int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
             int start = i * maxLogSize;

@@ -128,3 +128,12 @@ target_link_libraries(anyHook
         log
         z
         m)
+
+add_library(mydlopen mydlopen/mydlopen.cpp)
+target_include_directories(mydlopen PRIVATE
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/mydlopen>)
+add_library(sss SHARED yeecall/yeecall.cpp)
+target_include_directories(sss
+        PRIVATE
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/yeecall/>)
+target_link_libraries(sss Utils ${log-lib})

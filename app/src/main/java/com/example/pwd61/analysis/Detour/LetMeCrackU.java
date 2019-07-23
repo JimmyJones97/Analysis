@@ -8,6 +8,7 @@ import com.example.pwd61.analysis.Detour.fuckApp.JD_anatomy;
 import com.example.pwd61.analysis.Detour.fuckApp.ilongyuan;
 import com.example.pwd61.analysis.Detour.fuckApp.neteaseMail;
 import com.example.pwd61.analysis.Detour.fuckApp.pubg;
+import com.example.pwd61.analysis.Detour.fuckApp.yeecall;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage.*;
@@ -34,7 +35,11 @@ public class LetMeCrackU implements IXposedHookLoadPackage {
         } else if (lpparam.packageName.equals("com.netease.mail")) {
             Log.w(TAG, "let explorer 网易邮箱");
             neteaseMail.doHook(lpparam);
-        } else {
+        }
+        else if (lpparam.packageName.equals("com.yeecall.app")) {
+            Log.w(TAG, "let explorer yee");
+            yeecall.doHook(lpparam);
+        }else {
             Log.w(TAG, "Load package:" + lpparam.packageName + ",process:" + lpparam.processName);
         }
     }

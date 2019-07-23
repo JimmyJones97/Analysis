@@ -13,7 +13,7 @@
         android:textSize="17sp" />
 
     <Button
-        android:id="@+id/fuckit"
+        android:id="@+id/Test1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/more"
@@ -23,13 +23,13 @@
         android:text="@string/fuckits" />
 
     <Button
-        android:id="@+id/killit"
+        android:id="@+id/Test2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/more"
         android:layout_marginStart="20sp"
         android:layout_marginTop="1dp"
-        android:layout_toEndOf="@id/fuckit"
+        android:layout_toEndOf="@id/Test1"
         android:text="@string/killits" />
 
     <Button
@@ -39,15 +39,50 @@
         android:layout_below="@+id/more"
         android:layout_marginStart="20sp"
         android:layout_marginTop="1dp"
-        android:layout_toEndOf="@id/killit"
+        android:layout_toEndOf="@id/Test2"
         android:text="@string/decrypt" />
+
+    <Button
+        android:id="@+id/insert"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Test1"
+        android:text="@string/insert" />
+
+    <Button
+        android:id="@+id/query"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/insert"
+        android:text="@string/query" />
+
+    <Button
+        android:id="@+id/querys"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/query"
+        android:text="@string/querys" />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/querys"
+        android:text="@string/update" />
+
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/update"
+        android:text="@string/delete" />
 
 
     <EditText
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/decrypt"
+        android:layout_below="@id/delete"
         android:layout_alignParentStart="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
