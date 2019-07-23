@@ -13,128 +13,83 @@
         android:textSize="17sp" />
 
     <Button
-        android:id="@+id/JNI"
+        android:id="@+id/Test1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/more"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
-        android:text="@string/JNI" />
+        android:text="@string/fuckits" />
 
     <Button
-        android:id="@+id/Xposed"
+        android:id="@+id/Test2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/more"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="77dp"
+        android:layout_marginStart="20sp"
         android:layout_marginTop="1dp"
-        android:text="@string/Xposed" />
+        android:layout_toEndOf="@id/Test1"
+        android:text="@string/killits" />
 
     <Button
-        android:id="@+id/Constructor"
+        android:id="@+id/decrypt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/more"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="165dp"
+        android:layout_marginStart="20sp"
         android:layout_marginTop="1dp"
-        android:text="@string/Constructor" />
+        android:layout_toEndOf="@id/Test2"
+        android:text="@string/decrypt" />
 
     <Button
-        android:id="@+id/GC"
-        android:layout_width="wrap_content"
+        android:id="@+id/insert"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/more"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="292dp"
-        android:layout_marginTop="1dp"
-        android:text="@string/GC" />
+        android:layout_below="@id/Test1"
+        android:text="@string/insert" />
 
     <Button
-        android:id="@+id/Static"
-        android:layout_width="wrap_content"
+        android:id="@+id/query"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/JNI"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/Static" />
+        android:layout_below="@id/insert"
+        android:text="@string/query" />
 
     <Button
-        android:id="@+id/Virtual"
-        android:layout_width="wrap_content"
+        android:id="@+id/querys"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/JNI"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="84dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/Virtual" />
+        android:layout_below="@id/query"
+        android:text="@string/querys" />
 
     <Button
-        android:id="@+id/WideningConversion"
-        android:layout_width="wrap_content"
+        android:id="@+id/update"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/JNI"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="165dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/WideningConversion" />
+        android:layout_below="@id/querys"
+        android:text="@string/update" />
 
     <Button
-        android:id="@+id/SystemClass"
-        android:layout_width="wrap_content"
+        android:id="@+id/delete"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Static"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/SystemClass" />
+        android:layout_below="@id/update"
+        android:text="@string/delete" />
 
-    <Button
-        android:id="@+id/Native"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Static"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="87dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/Native" />
-
-    <Button
-        android:id="@+id/Thread"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Static"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="165dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/Thread" />
-
-    <Button
-        android:id="@+id/Exception"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/Static"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="253dp"
-        android:layout_marginTop="2dp"
-        android:text="@string/Exception" />
 
     <EditText
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/SystemClass"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
+        android:layout_below="@id/delete"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:background="@null"
-        android:editable="false"
-        android:inputType="none"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:inputType="none"
         android:maxLines="512"
         android:scrollbars="vertical"
         android:text="@string/app_name"

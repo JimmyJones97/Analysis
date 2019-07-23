@@ -1,13 +1,18 @@
-package com.example.pwd61.analysis.Detour.Utils;
+package com.example.pwd61.analysis.Utils;
 
 import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 
 /**************************************************************************
  * project:Analysis
@@ -112,7 +117,7 @@ public class FileUtils {
      */
     public static void writeFile(String text, String fileStr, boolean isAppend) {
         try {
-            Log.d("HACK", "writeFile: "+fileStr);
+            Log.d("HACK", "writeFile: " + fileStr);
             File file = new File(fileStr);
             File parentFile = file.getParentFile();
             if (!parentFile.exists()) {
@@ -123,11 +128,67 @@ public class FileUtils {
             }
             FileOutputStream f = new FileOutputStream(fileStr, isAppend);
             f.write(text.getBytes());
+            f.flush();
             f.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public static void writeFile(byte[] data, String filestr, boolean isAppend) {
+        try {
+            Log.d("HACK", "writeFile: " + filestr);
+            File file = new File(filestr);
+            File parentFile = file.getParentFile();
+            if (!parentFile.exists()) {
+                Log.d("HACK", "createparentfile fold ret:" + parentFile.mkdirs());
+            }
+            if (!file.exists()) {
+                Log.d("HACK", "file exist ret:" + file.createNewFile());
+            }
+            FileOutputStream f = new FileOutputStream(filestr, isAppend);
+            f.write(data);
+            f.flush();
+            f.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeFile(char[] data, String fileStr, boolean isAppend) {
+        try {
+            Log.d("HACK", "writeFile: " + fileStr);
+            File file = new File(fileStr);
+            File parentFile = file.getParentFile();
+            if (!parentFile.exists()) {
+                Log.d("HACK", "createparentfile fold ret:" + parentFile.mkdirs());
+            }
+            if (!file.exists()) {
+                Log.d("HACK", "file exist ret:" + file.createNewFile());
+            }
+            FileOutputStream f = new FileOutputStream(fileStr, isAppend);
+            f.write(getBytes(data));
+            f.flush();
+            f.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * char[] to byte[]
+     *
+     * @param chars 待转换的char数组
+     * @return char数组对应的字节数据
+     */
+    public static byte[] getBytes(char[] chars) {
+        Charset cs = Charset.forName("UTF-8");
+        CharBuffer cb = CharBuffer.allocate(chars.length);
+        cb.put(chars);
+        cb.flip();
+        ByteBuffer bb = cs.encode(cb);
+        return bb.array();
     }
 
     /**
@@ -303,6 +364,41 @@ public class FileUtils {
         } else {
             return 0;
         }
+    }
+    /**
+     * 读取
+     *
+     * @param filepath
+     *            带sdcard的路径
+     * @return
+     */
+    public static byte[] readFileFromSDCard(String filepath) {
+        ByteArrayOutputStream baos = null;
+        FileInputStream fis = null;
+        try {
+            // 创建字节输入流
+            fis = new FileInputStream(filepath);
+            baos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024 * 4];
+            int len = 0;
+            while ((len = fis.read(buf)) != -1) {
+                baos.write(buf, 0, len);
+            }
+            return baos.toByteArray();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 }
 

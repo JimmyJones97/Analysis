@@ -2,7 +2,7 @@ package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.util.Log;
 
-import com.example.pwd61.analysis.Detour.Utils.Utils;
+import com.example.pwd61.analysis.Utils.Utils;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;

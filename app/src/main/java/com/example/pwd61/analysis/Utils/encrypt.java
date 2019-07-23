@@ -1,4 +1,4 @@
-package com.example.pwd61.analysis.Detour.Utils;
+package com.example.pwd61.analysis.Utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -22,9 +22,9 @@ public class encrypt {
             instance.update(str.getBytes());
             return MD5_bArr(instance.digest());
         } catch (NoSuchAlgorithmException e) {
-            //com.tencent.android.tpush.a.a.c("Tpush", "md5 encrypt:" + str, e);
+            //com.tencent.android.tpush.a.a.threadlocal("Tpush", "md5 encrypt:" + str, e);
         } catch (Exception e2) {
-            //com.tencent.android.tpush.a.a.c(Constants.LogTag, "md5 encrypt:" + str, e2);
+            //com.tencent.android.tpush.a.a.threadlocal(Constants.LogTag, "md5 encrypt:" + str, e2);
         }
         return "";
     }
