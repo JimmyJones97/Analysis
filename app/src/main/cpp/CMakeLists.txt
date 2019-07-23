@@ -114,6 +114,7 @@ add_executable(fuckyu ${PROJECT_SOURCE_DIR}/exe/main.cpp)
 add_executable(myecho ${PROJECT_SOURCE_DIR}/myecho/myecho.c)
 add_executable(do_execve do_execve.c)
 add_executable(show_info show_info.c)
+add_executable(strsto linux_run/strtok_ex.c)
 #check attributes
 message(STATUS "构建版本:${CMAKE_BUILD_TYPE}")
 message(STATUS "源码:${SRC_LIST}\n ,${CMAKE_CXX_FLAGS} ")
@@ -128,3 +129,6 @@ target_link_libraries(anyHook
         log
         z
         m)
+
+
+
