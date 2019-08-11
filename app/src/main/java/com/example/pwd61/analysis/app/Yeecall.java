@@ -14,6 +14,8 @@ import com.example.pwd61.analysis.app.yeecall.ZayhuPref;
 import java.io.File;
 import java.security.MessageDigest;
 
+import static com.example.pwd61.analysis.Utils.Utils.Logd;
+
 /**************************************************************************
  * project:Analysis
  * Email: 
@@ -32,7 +34,9 @@ public class Yeecall {
     //    static SecurePreferences a;
     public static void getKey( Context ctx) {
         String kvs = "c_db_kvs_xxxxx";
+        Logd("start !");
         IKeyValueStorage IKeyValueStorage_inst = ZayhuPref.a(ctx, kvs, 5);
+//        IKeyValueStorage_inst.b("slat","".getBytes());
 
 
     }

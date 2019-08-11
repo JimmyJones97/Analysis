@@ -1,6 +1,7 @@
 package com.example.pwd61.analysis.app.yeecall;
 
 
+import android.util.Log;
 import android.widget.TabHost;
 
 import java.io.Externalizable;
@@ -286,6 +287,7 @@ public abstract class KeyValueStorageBase implements IKeyValueStorage {
     }
 
     public byte[] b(String str, byte[] bArr) {
+        Log.d("HACK","CAONIMA ");
         return (byte[]) a(str, bArr, l, false);
     }
 

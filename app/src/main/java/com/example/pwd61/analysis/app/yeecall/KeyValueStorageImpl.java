@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.CountDownLatch;
 
+import static com.example.pwd61.analysis.Utils.Utils.Logd;
+
+
 /**************************************************************************
  * project:Analysis
  * Email: 
@@ -21,7 +24,7 @@ public final class KeyValueStorageImpl extends KeyValueStorageBase {
     static int y;
     final PreferencesImpl A;
     final Object B = new Object();
-    final PreferencesCache C;
+//    final PreferencesCache C;
     final KeyValueDao keyValueDao;
     CipherBase E;
     boolean F = false;
@@ -239,7 +242,9 @@ public final class KeyValueStorageImpl extends KeyValueStorageBase {
         if (i <= 0) {
             i = 1;
         }
-        this.C = new PreferencesCache(i);
+        Logd("我错了？1");
+//        this.C = new PreferencesCache(i);
+        Logd("我错了？2");
         this.A = heu;
         this.z = str;
         this.keyValueDao = new KeyValueDao(heq, heu.d(), this.z);
@@ -415,7 +420,7 @@ public final class KeyValueStorageImpl extends KeyValueStorageBase {
         }
         e();
         synchronized (this.B) {
-            Object a = this.C.getv(str);
+//            Object a = this.C.getv(str);
             if (a == a) {
                 return false;
             } else if (a != null) {
@@ -442,15 +447,15 @@ public final class KeyValueStorageImpl extends KeyValueStorageBase {
         }
         e();//check databases close?
         synchronized (this.B) {
-            Object a = this.C.getv((Object) str);
+//            Object a = this.C.getv((Object) str);
             if (a != null && a != t && a.equals(t)) {
                 return true;
             } else if (!(t == null || t == a)) {
                 Object t2 = t;
                 if (t2 == null) {
-                    this.C.a(str, a);
+//                    this.C.a(str, a);
                 } else {
-                    this.C.a(str, t2);
+//                    this.C.a(str, t2);
                 }
                 WriteCacheEntry a2 = WriteCacheEntry.a();
                 a2.a = str;
@@ -601,13 +606,14 @@ public final class KeyValueStorageImpl extends KeyValueStorageBase {
     /* Code decompiled incorrectly, please refer to instructions dump. */
     @Override
     public <T> T a(String str, T t, KeyValueStorageBase.a<?> aVar, boolean z) {
+        SystemAPI.a("我进来了；");
         if (!d()) {
             return t;
         }
         e();
         synchronized (this.B) {
             boolean z2;
-            Object a = this.C.getv((Object) str);
+            Object a = null;
             if (a != null) {
                 this.N++;
                 z2 = this.J;
@@ -657,13 +663,13 @@ public final class KeyValueStorageImpl extends KeyValueStorageBase {
 
     public void c(String str) {
         synchronized (this.B) {
-            this.C.b(str);
+//            this.C.b(str);
         }
     }
 
     public void a() {
         synchronized (this.B) {
-            this.C.a();
+//            this.C.a();
         }
     }
 

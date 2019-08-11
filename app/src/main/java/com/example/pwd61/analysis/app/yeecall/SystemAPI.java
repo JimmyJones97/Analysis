@@ -16,15 +16,15 @@ import android.util.Log;
  ***************************************************************************/
 public class SystemAPI {
     public static void a(String str) {
-        if (!LibraryConfig.a) {
-            Log.i("YECALL", str);
-        }
+
+            Log.i("HACK", str);
+
     }
 
     public static void a(String str, Throwable th) {
-        if (!LibraryConfig.a) {
-            Log.i("YECALL", str, th);
-        }
+
+            Log.i("HACK", str, th);
+
     }
 
 }

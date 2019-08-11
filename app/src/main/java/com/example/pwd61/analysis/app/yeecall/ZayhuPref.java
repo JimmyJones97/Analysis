@@ -54,8 +54,6 @@ public class ZayhuPref {
     }
 
     public static IKeyValueStorage a(Context ctxd, String str, int i) {
-
-
         IKeyValueStorage a;
         synchronized (ZayhuPref.class) {
             if (securePreferences == null || securePreferences.a()) {

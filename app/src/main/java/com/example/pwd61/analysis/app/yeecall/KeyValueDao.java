@@ -36,7 +36,6 @@ public class KeyValueDao {
         SQLiteCursor cursor;
         String[] b = new String[1];
         int c = 0;
-
         Dao() {
         }
     }

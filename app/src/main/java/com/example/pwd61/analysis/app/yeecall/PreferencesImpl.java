@@ -36,6 +36,7 @@ public class PreferencesImpl extends SecurePreferences {
     private boolean m = false;
 
     public PreferencesImpl(Context context, String str, char[] cArr, int i) {
+
         this.ctx = context.getApplicationContext();
         this.settingstr = str;
         //this.databasefile = context.getDatabasePath(this.settingstr);
@@ -62,6 +63,7 @@ public class PreferencesImpl extends SecurePreferences {
             StringBuilder stringBuilder;
             try {
                 boolean e = e();
+                Logd("打开数据库是的是是是 是 是打算打赏埃斯蒂阿萨阿萨啊埃斯蒂阿萨  埃斯蒂阿萨阿萨 埃斯蒂埃斯蒂阿萨");
                 this.l = true;
                 this.m = !e;
                 if (this.m) {
@@ -83,6 +85,8 @@ public class PreferencesImpl extends SecurePreferences {
                     }
                 }
             } catch (Throwable th) {
+                th.printStackTrace();
+
             }
         }
     }
@@ -133,7 +137,7 @@ public class PreferencesImpl extends SecurePreferences {
             return true;
         }
         String ms = "verify " + this.settingstr + " failed";
-        SystemAPI.a(ms);
+        Logd(ms);
         return false;
     }
 
@@ -172,6 +176,7 @@ public class PreferencesImpl extends SecurePreferences {
             return null;
         } else {
             synchronized (this.c) {
+
                 KeyValueStorageImpl het = (KeyValueStorageImpl) this.c.get(str);
                 if (het == null || het.c()) {
                     het = new KeyValueStorageImpl(this.DBhelper, this, str, i);

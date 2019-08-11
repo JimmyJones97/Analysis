@@ -856,6 +856,6 @@ public class JD_anatomy {
         //動態加載
         Utils.Log("LOAD ourself so library!");
         //System.loadLibrary("native-lib");
-        //System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative-lib.so");
+        System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative_lib.so");
     }
 }

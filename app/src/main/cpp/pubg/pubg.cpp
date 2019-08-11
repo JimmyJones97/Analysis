@@ -156,8 +156,8 @@ void onSoLoaded(const char *name, void *handle) {
 //        }
     }
 #endif
-    if (strstr(name, "Security") != nullptr) {
-        if (findSymbol("JNI_OnLoad", "libSecurity.so", (unsigned long *) &symbol) == 0 && isFirst) {
+    if (strstr(name, "jdbitmapkit") != nullptr) {
+        if (findSymbol("JNI_OnLoad", "libjdbitmapkit.so", (unsigned long *) &symbol) == 0 && isFirst) {
             LOGD("FIND JNI_ONLOAD FUCK IT ：%p", symbol);
             MSHookFunction(symbol, (void *) new_JNI_OnLoad, (void **) &orig_JNI_OnLoad);
         }

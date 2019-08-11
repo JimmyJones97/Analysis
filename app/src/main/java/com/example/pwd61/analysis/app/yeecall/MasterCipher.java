@@ -164,7 +164,7 @@ public class MasterCipher extends CipherBase {
             }
             Logd("e:"+new String(this.e)+",arr:"+ HexUtils.byteArr2Str(bArr));
             secretKey = a(this.e, bArr);//
-            if (secretKey != null) {
+            if (secretKey == null) {
                 Logd("error in here ?");
                 return false;
             }

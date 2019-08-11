@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.4.1)
-project(native-lib)
+project(native_lib)
 
 #子目录
 add_subdirectory(slua)
@@ -53,7 +53,7 @@ find_library( # Sets the name of the path variable.
 #        cutils
 #        )
 add_library( # Sets the name of the library.
-        native-lib
+        native_lib
         # Sets the library as a shared library.
         SHARED
         # Provides a relative path to your source file(s).
@@ -64,7 +64,7 @@ add_library( # Sets the name of the library.
         ${SUBSTATE_SRC})
 
 target_link_libraries( # Specifies the target library.
-        native-lib
+        native_lib
         # Links the target library to the log library
         # included in the NDK.
         ${log-lib}

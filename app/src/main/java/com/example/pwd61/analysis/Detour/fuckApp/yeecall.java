@@ -39,6 +39,38 @@ public class yeecall {
     static boolean isFirstLoad = true;
 
     static public void doHook(XC_LoadPackage.LoadPackageParam lpparam) {
+        findAndHookMethod("com.yeecall.app.heu", lpparam.classLoader,
+                "a",
+                String.class,
+                "com.yeecall.app.het",
+
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        char[] bts = (char[]) param.getResult();
+//                        String sss = new String(bts);
+                        //dumpStack();
+                        Log.d(TAG, "PreferencesImpl ddddd: [:  " + param.args[0] + ",ret :" );
+                    }
+
+                });
+        findAndHookMethod("com.yeecall.app.het", lpparam.classLoader,
+                "d",
+                String.class,
+
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        char[] bts = (char[]) param.getResult();
+//                        String sss = new String(bts);
+                        //dumpStack();
+                        Log.d(TAG, "PreferencesImpl ddddd: [:  " + param.args[0] + ",ret :" + param.getResult());
+                    }
+
+                });
+
         findAndHookMethod("com.yeecall.app.hel", lpparam.classLoader,
                 "a",
                 Context.class,
@@ -173,7 +205,7 @@ public class yeecall {
                         //String ss=String.valueOf(obj1);
                         String sss = (String) param.args[0];
                         Log.d(TAG, "MasterCipher input param:" + sss + ",ret: ");
-                        if (sss.equalsIgnoreCase("c_db_kvs_xxxxx")) {
+                        if (sss.equalsIgnoreCase("slat")) {
                             dumpStack();
                         }
                     }
@@ -240,7 +272,7 @@ public class yeecall {
                         String ss = String.valueOf(obj1);
                         String sss = (String) param.args[0];
                         Log.d(TAG, "CipherProtocol input param:" + sss + ",int: " + param.args[1] + ",ret:" + ss);
-                        if (sss.equalsIgnoreCase("c_db_kvs_xxxxx")) {
+                        if (sss.contains("c_db_kvs_xxxxx")) {
 
                             dumpStack();
                         }
