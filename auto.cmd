@@ -1,0 +1,1 @@
+frida -U -l imvu_test.js -p pidofapp
