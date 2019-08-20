@@ -1,20 +1,14 @@
 package com.example.pwd61.analysis.app;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.text.TextUtils;
 
-import com.example.pwd61.analysis.app.yeecall.CipherProtocol;
-import com.example.pwd61.analysis.app.yeecall.HashUtils;
 import com.example.pwd61.analysis.app.yeecall.IKeyValueStorage;
 import com.example.pwd61.analysis.app.yeecall.ZayhuPref;
 
 import java.io.File;
-import java.security.MessageDigest;
 
-import static com.example.pwd61.analysis.Utils.Utils.Logd;
+import static com.example.pwd61.analysis.Utils.utils.Logd;
 
 /**************************************************************************
  * project:Analysis

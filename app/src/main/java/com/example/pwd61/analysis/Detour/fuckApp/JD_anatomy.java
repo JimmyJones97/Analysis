@@ -9,7 +9,7 @@ import android.webkit.WebView;
 import com.example.pwd61.analysis.Detour.verfiy.tester;
 import com.example.pwd61.analysis.Utils.ConvJSON;
 import com.example.pwd61.analysis.Utils.FileUtils;
-import com.example.pwd61.analysis.Utils.Utils;
+import com.example.pwd61.analysis.Utils.utils;
 
 import org.json.JSONObject;
 
@@ -20,7 +20,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-import static com.example.pwd61.analysis.Utils.Utils.dumpStack;
+import static com.example.pwd61.analysis.Utils.utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
@@ -159,7 +159,7 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("beforeHookedMethod: JDLoginWithPasswordNew: \n.account:" + param.args[0] +
+                        utils.Log("beforeHookedMethod: JDLoginWithPasswordNew: \n.account:" + param.args[0] +
                                 ",pwMD5:" + param.args[1] +
                                 "\nsessionID:" + param.args[2] +
                                 "\nvt code:" + param.args[3]);
@@ -471,7 +471,7 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("JDSharedPreferences:putString  :" + param.args[0] + ",:" + param.args[1]);
+                        utils.Log("JDSharedPreferences:putString  :" + param.args[0] + ",:" + param.args[1]);
                     }
 
                     @Override
@@ -489,14 +489,14 @@ public class JD_anatomy {
 //                    @Override
 //                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 //                        super.beforeHookedMethod(param);
-//                        Utils.Log("logo.cr.b  :" + param.args[0]);
+//                        utils.Log("logo.cr.b  :" + param.args[0]);
 //                        //dumpStack();
 //                    }
 //
 //                    @Override
 //                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 //                        super.afterHookedMethod(param);
-//                        //Utils.Log("logo spf 创建成功?:" + ((Boolean) param.getResult() ? "成功" : "失败"));
+//                        //utils.Log("logo spf 创建成功?:" + ((Boolean) param.getResult() ? "成功" : "失败"));
 //                    }
 //                });
 
@@ -508,14 +508,14 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("logo.cr.c  :" + param.args[0]);
+                        utils.Log("logo.cr.c  :" + param.args[0]);
                         //dumpStack();
                     }
 
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("logo.cr.c spf 创建成功?:" + ((Boolean) param.getResult() ? "成功" : "失败"));
+                        utils.Log("logo.cr.c spf 创建成功?:" + ((Boolean) param.getResult() ? "成功" : "失败"));
                     }
                 });
 
@@ -527,7 +527,7 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("hook logo.cr ");
+                        utils.Log("hook logo.cr ");
                         //dumpStack();
                     }
 
@@ -545,14 +545,14 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("LoadDoor enc before: " + param.args[0]);
+                        utils.Log("LoadDoor enc before: " + param.args[0]);
                         dumpStack();
                     }
 
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("LoadDoor enc after: " + param.getResult());
+                        utils.Log("LoadDoor enc after: " + param.getResult());
                     }
                 });
 
@@ -565,14 +565,14 @@ public class JD_anatomy {
                         super.beforeHookedMethod(param);
                         Context ctx = (Context) param.args[0];
                         String classname = ctx.getApplicationContext().getApplicationInfo().className;
-                        //Utils.Log("LoadDoor getToken before: " + classname);
+                        //utils.Log("LoadDoor getToken before: " + classname);
                         //dumpStack();
                     }
 
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("LoadDoor getToken after: " + param.getResult());
+                        utils.Log("LoadDoor getToken after: " + param.getResult());
                         //Object object=(Object)param.thisObject;
 
                         //XposedHelpers.callMethod("com.jd.sec.utils.LoadDoor","a",);
@@ -593,7 +593,7 @@ public class JD_anatomy {
                         String classname = ctx.getApplicationContext().getApplicationInfo().className;
                         String[] sArray = (String[]) param.args[2];
 
-                        Utils.Log("LoadDoor checkFingers before: " + classname
+                        utils.Log("LoadDoor checkFingers before: " + classname
                                 + ",args: " + param.args[1]
                                 + "-:" + sArray[0]
                                 + "-:" + sArray[1]
@@ -606,7 +606,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("LoadDoor checkFingers after: " + param.getResult());
+                        utils.Log("LoadDoor checkFingers after: " + param.getResult());
                     }
                 });
 
@@ -619,14 +619,14 @@ public class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
 
-                        Utils.Log("startAnimation before: ");
+                        utils.Log("startAnimation before: ");
                         dumpStack();
                     }
 
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("LoadDoor checkFingers after: " + param.getResult());
+                        utils.Log("LoadDoor checkFingers after: " + param.getResult());
                     }
                 });
         findAndHookMethod("logo.cr", lpparam.classLoader,
@@ -635,7 +635,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("logo.cr.b() return : " + param.getResult());
+                        utils.Log("logo.cr.b() return : " + param.getResult());
                         //dumpStack();
                     }
                 });
@@ -645,7 +645,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("client info return : " + ConvJSON.putJSON("clientinfo", param.getResult()));
+                        utils.Log("client info return : " + ConvJSON.putJSON("clientinfo", param.getResult()));
                         //dumpStack();
                     }
                 });
@@ -655,7 +655,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("tlv_0x4   return a: " + ConvJSON.putJSON("tlv_0x4", param.getResult()));
+                        utils.Log("tlv_0x4   return a: " + ConvJSON.putJSON("tlv_0x4", param.getResult()));
                         //dumpStack();
                     }
                 });
@@ -665,7 +665,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("ClientInfo   return : " + ConvJSON.putJSON("ClientInfo", param.getResult()));
+                        utils.Log("ClientInfo   return : " + ConvJSON.putJSON("ClientInfo", param.getResult()));
                         //dumpStack();
                     }
                 });
@@ -675,7 +675,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("tlv_0x4   return f: " + ConvJSON.putJSON("tlv_0x4", param.getResult()));
+                        utils.Log("tlv_0x4   return f: " + ConvJSON.putJSON("tlv_0x4", param.getResult()));
                         //dumpStack();
                     }
                 });
@@ -687,7 +687,7 @@ public class JD_anatomy {
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
                         SharedPreferences spf = (SharedPreferences) param.getResult();
-                        Utils.Log("jma_softfingerprint return : " + spf.getString("jma_softfingerprint", ""));
+                        utils.Log("jma_softfingerprint return : " + spf.getString("jma_softfingerprint", ""));
                         //dumpStack();
                     }
                 });
@@ -697,7 +697,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("get soft key return : " + param.getResult().toString());
+                        utils.Log("get soft key return : " + param.getResult().toString());
                         //dumpStack();
                     }
                 });
@@ -709,11 +709,11 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("kaishifasong");
+                        utils.Log("kaishifasong");
                         if (param.args[0] != null) {
                             Map<String, String> maps = (Map<String, String>) param.args[0];
                             for (Map.Entry<String, String> entry : maps.entrySet()) {
-                                Utils.Log("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                                utils.Log("Key = " + entry.getKey() + ", Value = " + entry.getValue());
                             }
                         }
                         //dumpStack();
@@ -727,7 +727,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("登录报文解包:" + ConvJSON.putJSON("package", param.getResult()));
+                        utils.Log("登录报文解包:" + ConvJSON.putJSON("package", param.getResult()));
                         dumpStack();
                     }
 
@@ -744,7 +744,7 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("beforeHookedMethod: sendMsgCodeForPhoneNumLogin4JD: \n.str1:" +
+                        utils.Log("beforeHookedMethod: sendMsgCodeForPhoneNumLogin4JD: \n.str1:" +
                                 param.args[0] +
                                 ",str2:" + param.args[1] +
                                 "\nstr3:" + param.args[2] +
@@ -767,7 +767,7 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("beforeHookedMethod: checkMsgCodeForPhoneNumLogin4JD: \n.str1:" +
+                        utils.Log("beforeHookedMethod: checkMsgCodeForPhoneNumLogin4JD: \n.str1:" +
                                 param.args[0] +
                                 ",str2:" + param.args[1] +
                                 "\nstr3:" + param.args[2]);
@@ -784,7 +784,7 @@ public class JD_anatomy {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("beforeHookedMethod: checkHistory4JDPhoneNumLoginNew: \n.str1:" +
+                        utils.Log("beforeHookedMethod: checkHistory4JDPhoneNumLoginNew: \n.str1:" +
                                 param.args[0] +
                                 ",str2:" + param.args[1] +
                                 "\nstr3:" + param.args[2]);
@@ -797,7 +797,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
-                        Utils.Log("beforeHookedMethod: getSalt:  str1:" + new String((byte[]) param.getResult()));
+                        utils.Log("beforeHookedMethod: getSalt:  str1:" + new String((byte[]) param.getResult()));
                     }
 
                 });
@@ -807,7 +807,7 @@ public class JD_anatomy {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                         super.afterHookedMethod(param);
-                        Utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.getResult());
+                        utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.getResult());
                     }
 
                 });
@@ -819,7 +819,7 @@ public class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         JSONObject jsonObject = (JSONObject) param.args[0];
-                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+                        utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
                     }
                 });
 
@@ -831,8 +831,8 @@ public class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
 //                        JSONObject jsonObject = (JSONObject) param.args[0];
-//                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
-                        Utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.args[0]);
+//                        utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+                        utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.args[0]);
                     }
                 });
         findAndHookMethod(" jd.wjlogin_sdk.util.y", lpparam.classLoader,
@@ -844,9 +844,9 @@ public class JD_anatomy {
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
 //                        JSONObject jsonObject = (JSONObject) param.args[0];
-//                        Utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+//                        utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
                         dumpStack();
-                        Utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.args[0] + (String) param.args[1]);
+                        utils.Log("beforeHookedMethod: toString:  str1:" + (String) param.args[0] + (String) param.args[1]);
                     }
                 });
 
@@ -854,7 +854,7 @@ public class JD_anatomy {
 
     static {
         //動態加載
-        Utils.Log("LOAD ourself so library!");
+        utils.Log("LOAD ourself so library!");
         //System.loadLibrary("native-lib");
         System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative_lib.so");
     }

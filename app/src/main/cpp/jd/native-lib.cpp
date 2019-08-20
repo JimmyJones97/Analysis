@@ -285,8 +285,11 @@ void hook_main() {
     __system_property_get("ro.build.version.sdk", sdk_ver_str);
     int api_level = atoi(sdk_ver_str);
     hook_dlopen(api_level);
+    int a=rest();
 }
-
+int rest(){
+    return 0;
+}
 void __attribute__((constructor)) init_so() {
     LOGD("into so hook module!!!");
     char abi[PATH_MAX] = "";

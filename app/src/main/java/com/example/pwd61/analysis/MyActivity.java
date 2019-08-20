@@ -12,11 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.pwd61.analysis.Utils.Utils;
+import com.example.pwd61.analysis.Utils.utils;
 import com.example.pwd61.analysis.app.Yeecall;
 import com.example.pwd61.analysis.app.yeecall.CipherProtocol;
 import com.example.pwd61.analysis.app.yeecall.HashUtils;
-import com.example.pwd61.analysis.app.yeecall.HexUtils;
+import com.android.tencent.qq.qq.Utils;
 import com.example.pwd61.analysis.app.yeecall.PreferencesImpl;
 
 import java.io.File;
@@ -26,16 +26,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
-import static com.example.pwd61.analysis.Utils.Utils.Logd;
+import static com.example.pwd61.analysis.Utils.utils.Logd;
 
 
 public class MyActivity extends AppCompatActivity implements View.OnClickListener {
     private String TAG = "HACK";
-    Button insert;
-    Button query;
-    Button update;
-    Button delete;
-    Button querys;
+
+    Button ctf;
     Uri uri = Uri.parse("content://hb.android.contentProvider/teacher");
 
     @Override
@@ -45,48 +42,13 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         Button jiemi = findViewById(R.id.decrypt);
         Button tst1 = findViewById(R.id.Test1);
         Button tst2 = findViewById(R.id.Test2);
+        ctf = (Button) findViewById(R.id.ctf);
         jiemi.setOnClickListener(this);
         tst2.setOnClickListener(this);
         tst1.setOnClickListener(this);
-        insert = (Button) findViewById(R.id.insert);
-        query = (Button) findViewById(R.id.query);
-        update = (Button) findViewById(R.id.update);
-        delete = (Button) findViewById(R.id.delete);
-        querys = (Button) findViewById(R.id.querys);
-        insert.setOnClickListener(new InsertListener());
-        query.setOnClickListener(new QueryListener());
-        // 方法二
-        update.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                ContentResolver cr = getContentResolver();
-                ContentValues cv = new ContentValues();
-                cv.put("name", "huangbiao");
-                cv.put("date_added", (new Date()).toString());
-                int uri2 = cr.update(uri, cv, "_ID=?", new String[]{"3"});
-                System.out.println("updated" + ":" + uri2);
-            }
-        });
+        ctf.setOnClickListener(this);
 
-        delete.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
-                ContentResolver cr = getContentResolver();
-                cr.delete(uri, "_ID=?", new String[]{"2"});
-            }
-        });
-
-        querys.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                ContentResolver cr = getContentResolver();
-                // 查找id为1的数据
-                Cursor c = cr.query(uri, null, null, null, null);
-                System.out.println(c.getCount());
-                c.close();
-            }
-        });
         copyAssets();
     }
 
@@ -108,8 +70,8 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 String stringBuilder2 = dbNameEnc + "t72f283666ae9a3482660515b0f9acebeaff91e04";
                 String columnsID = CipherProtocol.a(stringBuilder2);
                 Logd("加密列：" + columnsID);
-                Logd("test ："+PreferencesImpl.b("1".toCharArray()));
-                Logd("test1 :"+ PreferencesImpl.b("1234".toCharArray()));
+                Logd("test ：" + PreferencesImpl.b("1".toCharArray()));
+                Logd("test1 :" + PreferencesImpl.b("1234".toCharArray()));
                 Yeecall.getKey(getApplicationContext());
                 break;
             case R.id.Test1:
@@ -118,6 +80,10 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
             case R.id.Test2:
                 Log.d(TAG, "测试2");
                 break;
+            case R.id.ctf:
+                Log.d(TAG, "ctf");
+                utils.Logd(Utils.cec("10864017","1234")==false?"succ":"failed!");
+                break;
             default:
                 Log.d(TAG, "onClick: ");
 
@@ -125,39 +91,8 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    class InsertListener implements View.OnClickListener {
 
-        public void onClick(View v) {
-            // TODO Auto-generated method stub
-            ContentResolver cr = getContentResolver();
 
-            ContentValues cv = new ContentValues();
-            cv.put("title", "jiaoshou");
-            cv.put("name", "jiaoshi");
-            cv.put("sex", true);
-            Uri uri2 = cr.insert(uri, cv);
-            System.out.println(uri2.toString());
-        }
-
-    }
-
-    class QueryListener implements View.OnClickListener {
-
-        public void onClick(View v) {
-            // TODO Auto-generated method stub
-            ContentResolver cr = getContentResolver();
-            // 查找id为1的数据
-            Cursor c = cr.query(uri, null, "_ID=?", new String[]{"1"}, null);
-            //这里必须要调用 c.moveToFirst将游标移动到第一条数据,不然会出现index -1 requested , with a size of 1错误；cr.query返回的是一个结果集。
-            if (c.moveToFirst() == false) {
-                // 为空的Cursor
-                return;
-            }
-            int name = c.getColumnIndex("name");
-            System.out.println(c.getString(name));
-            c.close();
-        }
-    }
 
     private void copyAssets() {
         AssetManager assetManager = getAssets();
@@ -170,7 +105,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         if (files != null) for (String filename : files) {
             InputStream in = null;
             OutputStream out = null;
-            if(filename.contains("yeecall")) {
+            if (filename.contains("yeecall")) {
                 try {
 
                     in = assetManager.open(filename);
@@ -198,10 +133,11 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
             }
         }
     }
+
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
-        while((read = in.read(buffer)) != -1){
+        while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
         }
     }

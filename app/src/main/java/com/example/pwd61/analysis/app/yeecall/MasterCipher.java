@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import com.example.pwd61.analysis.Utils.FileUtils;
 import com.yeecall.library.securestorage.xor.XorJNI;
@@ -20,7 +19,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.MessageDigest;
 import java.util.UUID;
 
-import static com.example.pwd61.analysis.Utils.Utils.Logd;
+import static com.example.pwd61.analysis.Utils.utils.Logd;
 
 
 /**************************************************************************

@@ -35,6 +35,8 @@ void hookX86(void *);
 
 void x86_spec();
 
+int rest();
+
 void __attribute__((constructor)) init_so();
 
 #endif //Native_lib_h

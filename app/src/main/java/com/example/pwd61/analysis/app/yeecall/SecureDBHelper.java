@@ -8,8 +8,8 @@ import android.os.Process;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 
-import static com.example.pwd61.analysis.Utils.Utils.Log;
-import static com.example.pwd61.analysis.Utils.Utils.Logd;
+import static com.example.pwd61.analysis.Utils.utils.Log;
+import static com.example.pwd61.analysis.Utils.utils.Logd;
 
 
 /**************************************************************************

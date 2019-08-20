@@ -2,7 +2,7 @@ package com.example.pwd61.analysis.app.yeecall;
 
 import android.content.Context;
 
-import com.example.pwd61.analysis.Utils.Utils;
+import com.example.pwd61.analysis.Utils.utils;
 
 /**************************************************************************
  * project:Analysis
@@ -24,7 +24,7 @@ public class ZayhuPref {
     public static void a(Context context) {
         String ss=new String(b);
         ss+="zayhu.main.settings";
-        Utils.Log(ss);
+        utils.Log(ss);
         char[] sha1Arr = HashUtils.SHA1(ss).toCharArray();
         synchronized (ZayhuPref.class) {
             if (securePreferences != null && securePreferences.a()) {

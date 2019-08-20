@@ -41,48 +41,22 @@
         android:layout_marginTop="1dp"
         android:layout_toEndOf="@id/Test2"
         android:text="@string/decrypt" />
-
     <Button
-        android:id="@+id/insert"
-        android:layout_width="fill_parent"
+        android:id="@+id/ctf"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Test1"
-        android:text="@string/insert" />
-
-    <Button
-        android:id="@+id/query"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/insert"
-        android:text="@string/query" />
-
-    <Button
-        android:id="@+id/querys"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/query"
-        android:text="@string/querys" />
-
-    <Button
-        android:id="@+id/update"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/querys"
-        android:text="@string/update" />
-
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/update"
-        android:text="@string/delete" />
+        android:layout_below="@+id/more"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="1dp"
+        android:layout_toEndOf="@id/decrypt"
+        android:text="@string/ctf" />
 
 
     <EditText
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/delete"
+        android:layout_below="@id/ctf"
         android:layout_alignParentStart="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"

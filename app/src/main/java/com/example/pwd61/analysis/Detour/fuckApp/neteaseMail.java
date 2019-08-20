@@ -3,14 +3,14 @@ package com.example.pwd61.analysis.Detour.fuckApp;
 import android.util.Log;
 
 
-import com.example.pwd61.analysis.Utils.Utils;
+import com.example.pwd61.analysis.Utils.utils;
 
 import org.json.JSONObject;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-import static com.example.pwd61.analysis.Utils.Utils.dumpStack;
+import static com.example.pwd61.analysis.Utils.utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class neteaseMail {
@@ -53,13 +53,13 @@ public class neteaseMail {
                     protected void beforeHookedMethod(XC_MethodHook.MethodHookParam param) throws Throwable {
                         super.beforeHookedMethod(param);
                         //String sss=JSON.toJSONString(param.args[0]);
-                        //Utils.Log("存储类型:"+ConvJSON.putJSON("storage",param.args[0]));
-                        ///Utils.Log("存储类型:"+sss);
+                        //utils.Log("存储类型:"+ConvJSON.putJSON("storage",param.args[0]));
+                        ///utils.Log("存储类型:"+sss);
 //                        final String pwd = (String) XposedHelpers.getObjectField(param.thisObject, "F");
 //                        Log.d(TAG, "登陆f:" + param.getResult() + ",密码:" + pwd);
                         dumpStack();
                         //SmartBarUtils.Exec("ls");
-                        Utils.Log("神奇加密");
+                        utils.Log("神奇加密");
                     }
                 });
         findAndHookMethod("com.netease.mobimail.util.au", lpparam.classLoader,
@@ -72,7 +72,7 @@ public class neteaseMail {
 
                         dumpStack();
 
-                        Utils.Log("神奇");
+                        utils.Log("神奇");
                     }
                 });
         //doLogin
@@ -87,7 +87,7 @@ public class neteaseMail {
 
                         dumpStack();
 
-                        Utils.Log("神奇Login");
+                        utils.Log("神奇Login");
                     }
                 });
         findAndHookMethod("com.netease.mobimail.fragment.LoginFragment", lpparam.classLoader,

@@ -5,7 +5,7 @@ import android.util.Log;
 /**************************************************************************
  * project:Analysis
  * Email: 
- * file:Utils
+ * file:utils
  * Created by pwd61 on 2019/3/26 14:12
  * description:这里存放很多工具函数，准备
  *
@@ -14,7 +14,7 @@ import android.util.Log;
  *
  *
  ***************************************************************************/
-public class Utils {
+public class utils {
 
     /**
      * 超级长的日志打印工具

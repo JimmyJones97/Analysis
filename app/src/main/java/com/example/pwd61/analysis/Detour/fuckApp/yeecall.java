@@ -9,17 +9,12 @@ import android.util.Log;
 import com.example.pwd61.analysis.Utils.FileUtils;
 import com.example.pwd61.analysis.app.yeecall.HexUtils;
 
-import org.apache.commons.codec.binary.Hex;
-
-import java.lang.reflect.Field;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-import static com.example.pwd61.analysis.Utils.Utils.dumpStack;
+import static com.example.pwd61.analysis.Utils.utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
-import static de.robv.android.xposed.XposedHelpers.setIntField;
 
 /**************************************************************************
  * project:Analysis

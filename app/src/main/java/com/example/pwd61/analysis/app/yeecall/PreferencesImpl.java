@@ -6,7 +6,7 @@ import android.os.Environment;
 import java.io.File;
 import java.util.HashMap;
 
-import static com.example.pwd61.analysis.Utils.Utils.Logd;
+import static com.example.pwd61.analysis.Utils.utils.Logd;
 
 /**************************************************************************
  * project:Analysis

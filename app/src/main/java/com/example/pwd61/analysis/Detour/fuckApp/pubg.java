@@ -2,7 +2,7 @@ package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.util.Log;
 
-import com.example.pwd61.analysis.Utils.Utils;
+import com.example.pwd61.analysis.Utils.utils;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -39,7 +39,7 @@ public class pubg {
                 if(libname.equals("UE4")&&isFirstLoad) {
                     System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative-lib.so");
                     isFirstLoad=false;
-                    Utils.dumpStack();
+                    utils.dumpStack();
                 }
             }
         });

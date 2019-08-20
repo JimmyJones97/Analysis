@@ -1,6 +1,6 @@
 package com.example.pwd61.analysis.app.yeecall;
 
-import com.example.pwd61.analysis.Utils.Utils;
+import com.example.pwd61.analysis.Utils.utils;
 
 /**************************************************************************
  * project:Analysis
@@ -16,14 +16,14 @@ import com.example.pwd61.analysis.Utils.Utils;
  ***************************************************************************/
 public class LOG {
     public static void c(String str, Throwable th) {
-        Utils.Log(str);
+        utils.Log(str);
     }
 
     public static void a(String str) {
-        Utils.Log(str);
+        utils.Log(str);
     }
     public static void c(String str) {
-        Utils.Log(str);
+        utils.Log(str);
     }
 
 }

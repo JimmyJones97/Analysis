@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Analysis</string>
     <string name="decrypt">解密</string>
+    <string name="ctf">ctf</string>
     <string name="Exception">Exception</string>
     <string name="GC">GC</string>
     <string name="fuckits">test1</string>

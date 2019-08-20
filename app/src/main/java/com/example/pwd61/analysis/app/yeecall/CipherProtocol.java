@@ -24,7 +24,7 @@ import java.util.HashMap;
 public class CipherProtocol {
     static final HashCache cache = new HashCache();
     static final IVCache b = new IVCache();
-    static final HashMap<>
+
     static final ThreadLocal<MessageDigest> threadlocal = new ThreadLocal();
     static final char[] d = "0123456789abcdef".toCharArray();
     private static SecureRandom e = new SecureRandom();
