@@ -13,7 +13,7 @@ add_subdirectory(SoFixer)
 #add_subdirectory(HackLib)
 #add_subdirectory(zlib123)
 #add_subdirectory(minizip)
-
+add_subdirectory(linenoise)
 add_subdirectory(whale)
 #add_subdirectory(fileless_so)
 #add_subdirectory(curl)

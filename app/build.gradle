@@ -42,17 +42,17 @@ android {
     }
     flavorDimensions "version"
     productFlavors {
-        Emulator {
-            applicationIdSuffix ".emulator"
-            versionNameSuffix "-emulator"
-            dimension "version"
-            externalNativeBuild {
-                cmake {
-                    abiFilters 'x86'
-                    cppFlags "-frtti -fexceptions -D__i386__"
-                }
-            }
-        }
+//        Emulator {
+//            applicationIdSuffix ".emulator"
+//            versionNameSuffix "-emulator"
+//            dimension "version"
+//            externalNativeBuild {
+//                cmake {
+//                    abiFilters 'x86'
+//                    cppFlags "-frtti -fexceptions -D__i386__"
+//                }
+//            }
+//        }
         Spec_emu{
             //针对虚拟机下进行armeabi-v7a的编译
             applicationIdSuffix ".sepc_emu"
@@ -67,17 +67,17 @@ android {
                 }
             }
         }
-        RealPhone {
-            applicationIdSuffix ".realphone"
-            versionNameSuffix "-realphone"
-            externalNativeBuild {
-                cmake {
-                    abiFilters 'armeabi-v7a'
-                    cppFlags "-frtti -fexceptions "
-                }
-            }
-            dimension "version"
-        }
+//        RealPhone {
+//            applicationIdSuffix ".realphone"
+//            versionNameSuffix "-realphone"
+//            externalNativeBuild {
+//                cmake {
+//                    abiFilters 'armeabi-v7a'
+//                    cppFlags "-frtti -fexceptions "
+//                }
+//            }
+//            dimension "version"
+//        }
     }
     sourceSets {
         main {
