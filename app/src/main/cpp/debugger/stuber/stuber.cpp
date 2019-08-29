@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     while(1)
     {
         connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
-        if(connfd== nullptr)
+        if(connfd==0)
         {
             printf("# cannot accept addr!");
             exit(-1);

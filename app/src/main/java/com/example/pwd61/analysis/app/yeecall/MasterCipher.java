@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.telephony.TelephonyManager;
 
 import com.example.pwd61.analysis.Utils.FileUtils;
-import com.yeecall.library.securestorage.xor.XorJNI;
 
 
 import javax.crypto.Cipher;
@@ -130,9 +129,9 @@ public class MasterCipher extends CipherBase {
                 stringBuilder5.append(this.stringset);
                 stringBuilder5.append(firstEnc);
                 a2 = HexUtils.a(CipherProtocol.a(stringBuilder5.toString()).substring(1));
-                XorJNI.xor(a2, 0, a2.length, a6, 0, a6.length);
+                MyXorJNI.xor(a2, 0, a2.length, a6, 0, a6.length);
                 bArr = a6;
-                XorJNI.xor(a2, 0, a2.length, digest, 0, digest.length);
+                MyXorJNI.xor(a2, 0, a2.length, digest, 0, digest.length);
                 if (this.databaseDao.a(secEnc, a2) <= 0) {
                     return false;
                 }
@@ -146,12 +145,12 @@ public class MasterCipher extends CipherBase {
                 Logd("数据不为空,digest:"+HexUtils.byteArr2Str(digest));
                 Logd("长度：a2:"+a2.length+",digest:"+digest.length);
 //11
-                XorJNI.xor(a, 0, a2.length, digest, 0, digest.length);
+                MyXorJNI.xor(a, 0, a2.length, digest, 0, digest.length);
 
                 Logd("firstCheck1: a:"+HexUtils.byteArr2Str(a)+",digest:"+HexUtils.byteArr2Str(digest)+",a2:"+HexUtils.byteArr2Str(a2));
                 Logd("长度2：a2:"+a2.length+",bArr:"+bArr.length);
                 //2
-                XorJNI.xor(a, 0, a2.length, bArr, 0, bArr.length);
+                MyXorJNI.xor(a, 0, a2.length, bArr, 0, bArr.length);
                 Logd("firstCheck2: a:"+HexUtils.byteArr2Str(a)+",bArr:"+HexUtils.byteArr2Str(bArr)+",a2:"+HexUtils.byteArr2Str(a2));
                 firstEnc = HexUtils.byteArr2Str(a2);
                 length = firstEnc.length();
