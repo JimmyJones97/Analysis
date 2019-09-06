@@ -1,10 +1,10 @@
-package com.example.pwd61.analysis.app.cmb;
+package cmb.pb.shield.whitebox;
 
 /**************************************************************************
  * project:Analysis
  * Email: 
  * file:EncryptUtil
- * Created by pwd61 on 2019/8/23 10:19
+ * Created by pwd61 on 9/6/2019 5:50 PM
  * description:
  *
  *
@@ -12,8 +12,10 @@ package com.example.pwd61.analysis.app.cmb;
  *
  *
  ***************************************************************************/
+
 public class EncryptUtil {
-    public native String decryptcbc(String str);
+    static public native String decryptcbc(String str);
+
     static {
         System.loadLibrary("wb");
         //System.loadLibrary(StringObfuse.decode("140F"));

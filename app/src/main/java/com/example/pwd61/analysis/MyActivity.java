@@ -1,9 +1,6 @@
 package com.example.pwd61.analysis;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.res.AssetManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,7 +21,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Date;
+
+import cmb.pb.shield.whitebox.EncryptUtil;
 
 import static com.example.pwd61.analysis.Utils.utils.Logd;
 
@@ -61,7 +59,6 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 Log.d(TAG, "onClick: 解密->" + ss);
                 Log.d(TAG, "解密-->" + HashUtils.SHA1("50f4bb718e0772932cbc7342c6295b4826c353f67181e560c3375a5ccae62e9bzayhu.main.settings"));
                 Log.d(TAG, "TEST:" + CipherProtocol.a("abc"));
-
                 String dbName = "yeecall.sp";
                 String STR = dbName + "tcfb3352c2df335696c6bc631932c6a61a4cdf318";
                 String dbNameEnc = CipherProtocol.a(STR);
@@ -73,6 +70,7 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 Logd("test ：" + PreferencesImpl.b("1".toCharArray()));
                 Logd("test1 :" + PreferencesImpl.b("1234".toCharArray()));
                 Yeecall.getKey(getApplicationContext());
+
                 break;
             case R.id.Test1:
                 Log.d(TAG, "测试1");
@@ -82,7 +80,8 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.ctf:
                 Log.d(TAG, "ctf");
-                utils.Logd(Utils.cec("10864017","1234")==false?"succ":"failed!");
+                //utils.Logd(Utils.cec("10864017","1234")==false?"succ":"failed!");
+                Logd("[+]:"+EncryptUtil.decryptcbc("z/GU3NDcvTToe21svo0+KQ=="));
                 break;
             default:
                 Log.d(TAG, "onClick: ");

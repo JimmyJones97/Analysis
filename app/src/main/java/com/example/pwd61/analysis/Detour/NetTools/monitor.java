@@ -32,6 +32,8 @@ import java.util.Map;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
+import static com.example.pwd61.analysis.Utils.utils.Logd;
+import static com.example.pwd61.analysis.Utils.utils.dumpStack;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
@@ -68,12 +70,7 @@ public class monitor {
                 (lpparam.appInfo.flags & (ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)) != 0) {
             return;
         } else if (true) {///lpparam.isFirstApplication
-///            hookOncreate(lpparam);//
-//            if (mApp != null) {
-//                msp = mApp.getSharedPreferences(LOG_FILENAME, Activity.MODE_PRIVATE);
-//            }
             mLog("target", lpparam.packageName);
-
             //todo:网络监控开始
             if (NETWORK) {
                 findAndHookConstructor(InetSocketAddress.class, String.class, int.class, new XC_MethodHook() {
@@ -181,7 +178,12 @@ public class monitor {
                         protected void beforeHookedMethod(MethodHookParam param)
                                 throws Throwable {
                             byte[] d = (byte[]) param.args[0];
-                            mLog("socketdata1", new String(d));
+                            String dat=new String(d);
+
+                            if(dat.length()>100) {
+                                mLog("socketdata1", dat);
+                                dumpStack();
+                            }
                             super.beforeHookedMethod(param);
                         }
                     });
@@ -263,6 +265,7 @@ public class monitor {
                     protected void beforeHookedMethod(MethodHookParam param)
                             throws Throwable {
                         URL url = (URL) param.thisObject;
+//                        url.openConnection()
                         mLog("urlconn", url.toString());
                         super.beforeHookedMethod(param);
                     }
@@ -275,25 +278,9 @@ public class monitor {
     }
 
     private static void mLog(String tag, String text) {
-        Log.i(TARGET_APP, "xuhu" + tag + ":" + text);
-        if (msp != null) {
-            if (HTTP_DATA) {
-                mSharePrefer(text, tag);
-            } else {
-                int i = text.indexOf("?");
-                if (i > 0)
-                    mSharePrefer(text.substring(0, i), tag);
-                else
-                    mSharePrefer(text, tag);
-            }
-        }
+        Logd(tag + ":-->" + text);
     }
 
-    private static void mSharePrefer(String key, String value) {
-        SharedPreferences.Editor editor = msp.edit();
-        editor.putString(key, value);
-        editor.commit();
-    }
 
     private static void hookHttpClient(XC_LoadPackage.LoadPackageParam lpparam) {
         findAndHookMethod("org.apache.http.impl.client.AbstractHttpClient", lpparam.classLoader,
@@ -409,7 +396,5 @@ public class monitor {
                 });
     }
 
-
-    private boolean HAS_REGISTER_LISENER = false;
 }
 

@@ -41,6 +41,7 @@
         android:layout_marginTop="1dp"
         android:layout_toEndOf="@id/Test2"
         android:text="@string/decrypt" />
+
     <Button
         android:id="@+id/ctf"
         android:layout_width="wrap_content"
@@ -70,4 +71,20 @@
         android:textCursorDrawable="@null"
         android:textIsSelectable="true"
         android:textSize="17sp" />
+
+    <FrameLayout
+        android:id="@+id/frame_content"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true">
+
+    </FrameLayout>
+    <!--<com.example.pwd61.analysis.views.PlasmaView-->
+        <!--android:id="@+id/plasam"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--&gt;-->
+
+    <!--</com.example.pwd61.analysis.views.PlasmaView>-->
 </RelativeLayout>
