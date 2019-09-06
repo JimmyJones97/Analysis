@@ -19,6 +19,7 @@
 #include "debug_utils.h"
 #include "android_debug.h"
 #include <inttypes.h>
+#include <Util.h>
 
 static const char* FILE_PREFIX = "/sdcard/data/audio";
 
