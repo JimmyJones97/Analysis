@@ -19,12 +19,12 @@ import java.security.NoSuchAlgorithmException;
 public class HashUtils {
     public static String SHA1(String str) {
         try {
-            return Decrypt("SHA1", str.getBytes("utf8"));
+            return eNcrypt("SHA1", str.getBytes("utf8"));
         } catch (UnsupportedEncodingException unused) {
-            return Decrypt("SHA1", str.getBytes());
+            return eNcrypt("SHA1", str.getBytes());
         }
     }
-    private static String Decrypt(String type, byte[] bArr) {
+    private static String eNcrypt(String type, byte[] bArr) {
         return a(type, bArr, 0, bArr.length);
     }
     private static String a(String type, byte[] bArr, int i, int i2) {

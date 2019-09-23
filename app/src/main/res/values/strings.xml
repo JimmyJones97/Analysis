@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Analysis</string>
-    <string name="decrypt">解密</string>
+    <string name="inputedit">输入</string>
+    <string name="yeecall">yeecall</string>
     <string name="ctf">ctf</string>
+    <string name="cmb">cmb</string>
     <string name="Exception">Exception</string>
     <string name="GC">GC</string>
-    <string name="fuckits">test1</string>
+    <string name="fuckits">Test1</string>
     <string name="Native">Native</string>
     <string name="Static">Static</string>
     <string name="SystemClass">System</string>

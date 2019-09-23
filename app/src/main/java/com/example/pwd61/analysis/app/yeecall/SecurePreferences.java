@@ -8,6 +8,8 @@ import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import static com.example.pwd61.analysis.Utils.utils.Logd;
+
 /**************************************************************************
  * project:Analysis
  * Email: 
@@ -21,44 +23,45 @@ import java.util.WeakHashMap;
  *
  ***************************************************************************/
 public abstract class SecurePreferences {
-    protected static final Map<String, SecurePreferences> a = new WeakHashMap();
+    protected static final Map<String, SecurePreferences> hashMap = new WeakHashMap();
 
     public abstract IKeyValueStorage a(String str, int i);
 
     public abstract boolean a();
 
-    public static SecurePreferences a(Context context, String str, char[] cArr) {
-        return a(context, str, cArr, 0);
+    public static SecurePreferences a(Context context, String dbName, char[] ket) {
+        return a(context, dbName, ket, 0);
     }
 
-    public static SecurePreferences a(Context context, String str, char[] cArr, int i) {
+    public static SecurePreferences a(Context context, String dbName, char[] ket, int i) {
         SecurePreferences hee = null;
-        if (context == null || TextUtils.isEmpty(str) || cArr == null || cArr.length == 0) {
+        if (context == null || TextUtils.isEmpty(dbName) || ket == null || ket.length == 0) {
             return null;
         }
         switch (i) {
             case 0:
             case 1:
-                String stringBuilder = str;
-                stringBuilder += ".sp";
-                File sdCard = Environment.getExternalStorageDirectory();
-                File databasePath = context.getDatabasePath(stringBuilder);
-                File file = new File(Environment.getExternalStorageDirectory(), stringBuilder);
+                String dbNamer = dbName;
+                dbNamer += ".sp";
+//                File sdCard = Environment.getExternalStorageDirectory();
+//                File databasePath = context.getDatabasePath(dbNamer);
+                File file = new File(Environment.getExternalStorageDirectory(), dbNamer);
                 if (i == 1 && (!file.exists() || !file.isFile())) {
                     return null;
                 }
-                synchronized (a) {
-                    SecurePreferences hee2 = (SecurePreferences) a.get(stringBuilder);
+                synchronized (hashMap) {
+                    SecurePreferences hee2 = (SecurePreferences) hashMap.get(dbNamer);
                     if (hee2 != null) {
                         if (!hee2.a()) {
-                            if (!(hee2 instanceof PreferencesImpl) || ((PreferencesImpl) hee2).a(cArr)) {
+                            if (!(hee2 instanceof PreferencesImpl) || ((PreferencesImpl) hee2).a(ket)) {
                                 hee = hee2;
                             }
                         }
                     }
-                    hee = new PreferencesImpl(context, stringBuilder, cArr, i);
-                    a.put(stringBuilder, hee);
+                    hee = new PreferencesImpl(context, dbNamer, ket, i);
+                    hashMap.put(dbNamer, hee);
                 }
+                Logd("创建yeecall securePrefer成功");
                 return hee;
             default:
                 StringBuilder stringBuilder5 = new StringBuilder();

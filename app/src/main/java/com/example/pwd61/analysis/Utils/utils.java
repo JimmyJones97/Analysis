@@ -44,6 +44,35 @@ public class utils {
         }
     }
 
+    /**
+     * d
+     * @param veryLongString debug
+     */
+    public static void Logd(String tag,String veryLongString,Throwable th) {
+        veryLongString+=tag+":";
+        int maxLogSize = 1000;
+        for (int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+            int start = i * maxLogSize;
+            int end = (i + 1) * maxLogSize;
+            end = end > veryLongString.length() ? veryLongString.length() : end;
+            Log.d("HACK", veryLongString.substring(start, end));
+        }
+    }
+    /**
+     * d
+     * @param veryLongString debug
+     */
+    public static void Logd(String tag,String veryLongString) {
+        veryLongString=tag+":"+veryLongString;
+        int maxLogSize = 1000;
+        for (int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+            int start = i * maxLogSize;
+            int end = (i + 1) * maxLogSize;
+            end = end > veryLongString.length() ? veryLongString.length() : end;
+            Log.d("HACK", veryLongString.substring(start, end));
+        }
+    }
+
     //回溯调用栈
     public static void dumpStack() {
         StringBuilder sb = new StringBuilder();

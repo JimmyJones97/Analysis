@@ -79,11 +79,11 @@ public class PreferencesImpl extends SecurePreferences {
                     SystemAPI.a(stringBuilder.toString());
                 }
                 notifyAll();
-                if (this.l && this.m) {
-                    synchronized (a) {
-                        a.remove(this.settingstr);
-                    }
-                }
+//                if (this.l && this.m) {
+//                    synchronized (a) {
+//                        a.remove(this.settingstr);
+//                    }
+//                }
             } catch (Throwable th) {
                 th.printStackTrace();
 

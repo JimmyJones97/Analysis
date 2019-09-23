@@ -19,19 +19,24 @@ import com.example.pwd61.analysis.Utils.utils;
 public class ZayhuPref {
     static SecurePreferences securePreferences;
 
-    private static final char[] b = "50f4bb718e0772932cbc7342c6295b4826c353f67181e560c3375a5ccae62e9b".toCharArray();
+    private static final char[] prefKey = "50f4bb718e0772932cbc7342c6295b4826c353f67181e560c3375a5ccae62e9b".toCharArray();
 
+    /**
+     * 返回一个
+     * *
+     * **/
     public static void a(Context context) {
-        String ss=new String(b);
-        ss+="zayhu.main.settings";
-        utils.Log(ss);
-        char[] sha1Arr = HashUtils.SHA1(ss).toCharArray();
+        java.lang.StringBuilder stringBuilder = new java.lang.StringBuilder();
+        stringBuilder.append(new java.lang.String(prefKey));
+        stringBuilder.append("zayhu.main.settings");
+
+        char[] ket = HashUtils.SHA1(stringBuilder.toString()).toCharArray();
         synchronized (ZayhuPref.class) {
             if (securePreferences != null && securePreferences.a()) {
                 securePreferences = null;
             }
             if (securePreferences == null) {
-                securePreferences = SecurePreferences.a(context, "yeecall", sha1Arr);
+                securePreferences = SecurePreferences.a(context, "yeecall", ket);
             }
         }
         if (securePreferences != null) {
@@ -58,6 +63,9 @@ public class ZayhuPref {
         synchronized (ZayhuPref.class) {
             if (securePreferences == null || securePreferences.a()) {
                 a = null;
+                /**
+                 * create securePreferennces function.
+                 */
                 a(ctxd);
             }
             a = securePreferences.a(str, i);

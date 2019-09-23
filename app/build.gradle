@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-//    signingConfigs {
-//        config {
-//            keyAlias 'demo'
-//            keyPassword '123456'
-//            storeFile file('../work.jks')
-//            storePassword '123456'
-//        }
-//    }
+    signingConfigs {
+        config {
+            keyAlias 'demo'
+            keyPassword '123456'
+            storeFile file('../key/work.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 22

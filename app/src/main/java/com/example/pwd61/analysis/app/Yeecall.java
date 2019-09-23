@@ -28,7 +28,7 @@ public class Yeecall {
     //    static SecurePreferences a;
     public static void getKey( Context ctx) {
         String kvs = "c_db_kvs_xxxxx";
-        Logd("start !");
+
         IKeyValueStorage IKeyValueStorage_inst = ZayhuPref.a(ctx, kvs, 5);
 //        IKeyValueStorage_inst.b("slat","".getBytes());
 

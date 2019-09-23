@@ -46,7 +46,12 @@ public class yeecall {
 //                        char[] bts = (char[]) param.getResult();
 //                        String sss = new String(bts);
                         //dumpStack();
-                        Log.d(TAG, "PreferencesImpl ddddd: [:  " + param.args[0] + ",ret :" );
+                        Log.d(TAG, "PreferencesImpl dds->:" + param.args[0] + ",ret :" );
+                        String par=(String) param.args[0];
+                        if(par.equalsIgnoreCase("slat"))
+                        {
+                            dumpStack();
+                        }
                     }
 
                 });
@@ -62,6 +67,11 @@ public class yeecall {
 //                        String sss = new String(bts);
                         //dumpStack();
                         Log.d(TAG, "PreferencesImpl ddddd: [:  " + param.args[0] + ",ret :" + param.getResult());
+                        String par=(String) param.args[0];
+                        if(par.equalsIgnoreCase("slat"))
+                        {
+                            dumpStack();
+                        }
                     }
 
                 });
@@ -253,9 +263,7 @@ public class yeecall {
                 });
         findAndHookMethod("com.yeecall.app.hel", lpparam.classLoader,
                 "a",
-
                 String.class,
-
                 int.class,
                 new XC_MethodHook() {
                     @Override
@@ -268,7 +276,6 @@ public class yeecall {
                         String sss = (String) param.args[0];
                         Log.d(TAG, "CipherProtocol input param:" + sss + ",int: " + param.args[1] + ",ret:" + ss);
                         if (sss.contains("c_db_kvs_xxxxx")) {
-
                             dumpStack();
                         }
                     }
