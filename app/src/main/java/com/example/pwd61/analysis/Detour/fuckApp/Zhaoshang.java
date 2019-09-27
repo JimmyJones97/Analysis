@@ -1,12 +1,9 @@
 package com.example.pwd61.analysis.Detour.fuckApp;
 
 import android.util.Log;
-
 import java.util.Map;
-
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 /**************************************************************************
@@ -97,6 +94,6 @@ public class Zhaoshang {
     }
 
     private static void mLog(String tag, String text) {
-        Log.i(TAG, "xuhu" + tag + ":" + text);
+        Log.i(TAG, tag + ":" + text);
     }
 }

@@ -10,7 +10,6 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 
-
 /**************************************************************************
  * project:Analysis
  * Email: 
@@ -25,7 +24,8 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
  ***************************************************************************/
 public class pubg {
     static private String TAG = "PUBG";
-    static boolean isFirstLoad=true;
+    static boolean isFirstLoad = true;
+
     static public void doHook(XC_LoadPackage.LoadPackageParam lpparam) {
         /**
          * 挂钩在java.lang.Runtime中loadLibrary（）。
@@ -36,9 +36,9 @@ public class pubg {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 String libname = (String) param.args[0];
                 Log.d(TAG, "Loading of library--> lib" + libname + ".so after.");
-                if(libname.equals("UE4")&&isFirstLoad) {
+                if (libname.equals("UE4") && isFirstLoad) {
                     System.load("/data/data/com.example.pwd61.analysis.sepc_emu/lib/libnative-lib.so");
-                    isFirstLoad=false;
+                    isFirstLoad = false;
                     utils.dumpStack();
                 }
             }

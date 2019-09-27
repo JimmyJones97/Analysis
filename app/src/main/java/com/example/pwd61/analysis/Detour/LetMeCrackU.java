@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.pwd61.analysis.Detour.NetTools.monitor;
 import com.example.pwd61.analysis.Detour.fuckApp.JD_anatomy;
+import com.example.pwd61.analysis.Detour.fuckApp.Zhaoshang;
 import com.example.pwd61.analysis.Detour.fuckApp.ilongyuan;
 import com.example.pwd61.analysis.Detour.fuckApp.neteaseMail;
 import com.example.pwd61.analysis.Detour.fuckApp.pubg;
@@ -30,8 +31,8 @@ public class LetMeCrackU implements IXposedHookLoadPackage {
             ilongyuan.doHook(lpparam);
         } else if (lpparam.packageName.equals("cmb.pb")) {
             Log.w(TAG, "let explorer 招商银行");
-            //Zhaoshang.doHook(lpparam);
-            monitor.doHook(lpparam);
+            Zhaoshang.doHook(lpparam);
+//            monitor.doHook(lpparam);
         } else if (lpparam.packageName.equals("com.netease.mail")) {
             Log.w(TAG, "let explorer 网易邮箱");
             neteaseMail.doHook(lpparam);

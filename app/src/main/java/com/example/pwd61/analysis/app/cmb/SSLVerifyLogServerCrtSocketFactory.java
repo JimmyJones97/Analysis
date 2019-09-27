@@ -1,13 +1,16 @@
 package com.example.pwd61.analysis.app.cmb;
 
 import android.content.Context;
+import android.webkit.JavascriptInterface;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLSocketFactory;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
 import java.security.KeyStore;
@@ -21,6 +24,8 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import static com.example.pwd61.analysis.Utils.utils.Logd;
 
 
 /**************************************************************************
@@ -43,58 +48,65 @@ import javax.net.ssl.X509TrustManager;
 public class SSLVerifyLogServerCrtSocketFactory extends SSLSocketFactory {
 
     private static final String TAG = "SSLTrustAllSocketFactory";
-    private SSLContext mCtx;
+    private SSLContext mCtx = SSLContext.getInstance("TLS");
     private Context context;
-    private javax.net.ssl.SSLContext a = javax.net.ssl.SSLContext.getInstance("TLS");
-
 
 
     public SSLVerifyLogServerCrtSocketFactory(String crtName, KeyStore truststore, Context context)
             throws Throwable {
 //        super(truststore);
         this.context = context;
+        KeyManagerFactory instance = javax.net.ssl.KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        instance.init(truststore, "cert@cmb".toCharArray());
+
         try {
             InputStream certInputStream = new BufferedInputStream(context.getAssets().open(crtName));
             CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
             final X509Certificate serverCertificate = (X509Certificate) certificateFactory.generateCertificate(certInputStream);
-            mCtx = SSLContext.getInstance("TLS");
+
             mCtx.init(null, new TrustManager[]{new X509TrustManager() {
                         @Override
                         public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
+                            Logd("check trusted");
                         }
 
                         @Override
-                        public void checkServerTrusted(X509Certificate[] x509Certificates, String authType) throws CertificateException {
-                            if (x509Certificates == null) {
+                        public void checkServerTrusted(X509Certificate[] x509CertificateArr, String authType) throws CertificateException {
+                            if (x509CertificateArr == null) {
                                 throw new IllegalArgumentException("checkServerTrusted x509Certificates is null ");
-                            }
-                            if (x509Certificates.length < 0) {
+                            } else if (x509CertificateArr.length <= 0) {
                                 throw new IllegalArgumentException("checkServerTrusted x509Certificates is null ");
-                            }
-
-                            for (X509Certificate cert : x509Certificates) {
-                                cert.checkValidity();
+                            } else {
                                 try {
-                                    cert.verify(serverCertificate.getPublicKey());
-                                } catch (NoSuchAlgorithmException e) {
-                                    e.printStackTrace();
-                                } catch (InvalidKeyException e) {
-                                    e.printStackTrace();
-                                } catch (NoSuchProviderException e) {
-                                    e.printStackTrace();
-                                } catch (SignatureException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                                    javax.net.ssl.TrustManagerFactory instance = javax.net.ssl.TrustManagerFactory.getInstance("X509");
+                                    instance.init((java.security.KeyStore) null);
+                                    for (javax.net.ssl.TrustManager trustManager : instance.getTrustManagers()) {
+                                        ((javax.net.ssl.X509TrustManager) trustManager).checkServerTrusted(x509CertificateArr, authType);
+                                    }
+                                    try {
+                                        String host = new URL(authType).getHost();
+                                        Logd("checkDomainName:" + authType + ",host:" + host);
+                                        if ("mobile.cmbchina.com".equalsIgnoreCase(host)) {
+                                            com.example.pwd61.analysis.app.cmb.SSLVerifyLogServerCrtSocketFactory.this.handleit(x509CertificateArr);
+                                        }
+                                    } catch (java.lang.Exception e) {
+                                        throw new java.security.cert.CertificateException(e);
+                                    }
 
+                                } catch (Exception e) {
+                                    throw new java.security.cert.CertificateException(e);
+                                }
+
+
+                            }
                         }
 
                         @Override
                         public X509Certificate[] getAcceptedIssuers() {
                             return new X509Certificate[0];
                         }
-                    }},
+                    }
+                    },
                     null);
         } catch (Exception ex) {
         }
@@ -145,43 +157,71 @@ public class SSLVerifyLogServerCrtSocketFactory extends SSLSocketFactory {
         }
         return null;
     }
+
     public java.lang.String[] getDefaultCipherSuites() {
         return new java.lang.String[0];
     }
 
 
-
     public java.net.Socket createSocket(java.lang.String str, int i) throws java.io.IOException {
         while (true) {
             try {
-                return this.a.getSocketFactory().createSocket(str, i);
+                return this.mCtx.getSocketFactory().createSocket(str, i);
             } catch (java.lang.Exception unused) {
             }
         }
     }
-    public java.net.Socket createSocket(java.lang.String str, int i, java.net.InetAddress inetAddress, int i2) throws java.io.IOException {
+
+    public java.net.Socket createSocket(java.lang.String str, int i, java.
+            net.InetAddress inetAddress, int i2) throws java.io.IOException {
         while (true) {
             try {
-                return this.a.getSocketFactory().createSocket(str, i, inetAddress, i2);
+                return this.mCtx.getSocketFactory().createSocket(str, i, inetAddress, i2);
             } catch (java.lang.Exception unused) {
             }
         }
     }
-    public java.net.Socket createSocket(java.net.InetAddress inetAddress, int i) throws java.io.IOException {
+
+    public java.net.Socket createSocket(java.net.InetAddress inetAddress, int i) throws
+            java.io.IOException {
         while (true) {
             try {
-                return this.a.getSocketFactory().createSocket(inetAddress, i);
+                return this.mCtx.getSocketFactory().createSocket(inetAddress, i);
             } catch (java.lang.Exception unused) {
             }
         }
     }
-    public java.net.Socket createSocket(java.net.InetAddress inetAddress, int i, java.net.InetAddress inetAddress2, int i2) throws java.io.IOException {
+
+    public java.net.Socket createSocket(java.net.InetAddress inetAddress, int i, java.
+            net.InetAddress inetAddress2, int i2) throws java.io.IOException {
         while (true) {
             try {
-                return this.a.getSocketFactory().createSocket(inetAddress, i, inetAddress2, i2);
+                return this.mCtx.getSocketFactory().createSocket(inetAddress, i, inetAddress2, i2);
             } catch (java.lang.Exception unused) {
             }
         }
     }
+
+
+    private void handleit(java.security.cert.X509Certificate[] x509CertificateArr) {
+        for (int i = 0; i < x509CertificateArr.length; i++) {
+            try {
+                java.security.MessageDigest instance = java.security.MessageDigest.getInstance("SHA-1");
+                instance.update(x509CertificateArr[i].getEncoded());
+                java.lang.String a = BaseFunc.hex(instance.digest());
+                java.lang.String name = x509CertificateArr[i].getIssuerDN().getName();
+                org.json.JSONObject jSONObject = new org.json.JSONObject();
+                a = a.toLowerCase(java.util.Locale.getDefault());
+                if (!android.text.TextUtils.isEmpty(a)) {
+                    jSONObject.put("FingerPrint", a);
+                    jSONObject.put("CertIssuer", name);
+//                    com.pb.infrastructrue.network.d.a().a(a, jSONObject);
+                }
+            } catch (java.lang.Exception e) {
+//                com.pb.infrastructrue.g.b.a(b, e.getMessage(), e);
+            }
+        }
+    }
+
 
 }

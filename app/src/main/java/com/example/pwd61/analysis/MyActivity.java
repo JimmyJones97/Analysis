@@ -29,6 +29,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.security.KeyStore;
+
+import javax.net.ssl.KeyManagerFactory;
 
 import cmb.pb.shield.whitebox.EncryptUtil;
 
@@ -71,13 +75,12 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.yeecall:
                 /**** 解密yc_c.sp ****/
-                String data="a834d1d61d7b2c9d7072adb704dab86010712b5b9a731ec5d2ed7ea2bd61832c4f085c51b6fcd948adde96f0067fc06d672acedc3d72f2db155455bd4cdef73e";
-                String SS=HashUtils.SHA1(data);
-                addit("yee",SS);
-                addit("tyee",CipherProtocol.a("c_db_kvs_xxxxxslat"));
+                String data = "a834d1d61d7b2c9d7072adb704dab86010712b5b9a731ec5d2ed7ea2bd61832c4f085c51b6fcd948adde96f0067fc06d672acedc3d72f2db155455bd4cdef73e";
+                String SS = HashUtils.SHA1(data);
+                addit("yee", SS);
+                addit("tyee", CipherProtocol.a("c_db_kvs_xxxxxslat"));
 
-                IKeyValueStorage IKS=ZayhuPref.a(getApplicationContext(),"c_db_kvs_xxxxx",5);
-
+                IKeyValueStorage IKS = ZayhuPref.a(getApplicationContext(), "c_db_kvs_xxxxx", 5);
 
 
                 String dbName = "yeecall.sp";
@@ -91,6 +94,8 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 Logd("test ：" + PreferencesImpl.b("1".toCharArray()));
                 Logd("test1 :" + PreferencesImpl.b("1234".toCharArray()));
                 Yeecall.getKey(getApplicationContext());
+                HttpURLConnection con;
+//                con.setRequestProperty("","");
 
                 break;
             case R.id.Test1:
@@ -101,16 +106,29 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.ctf:
                 Log.d(TAG, "ctf");
-                addit("ctf",!Utils.cec("10864017","1234")?"succ":"failed!");
-                addit("[+]" , EncryptUtil.decryptcbc("z/GU3NDcvTToe21svo0+KQ=="));
+                addit("ctf", !Utils.cec("10864017", "1234") ? "succ" : "failed!");
+                addit("[+]", EncryptUtil.decryptcbc("z/GU3NDcvTToe21svo0+KQ=="));
                 break;
             case R.id.cmb:
                 Log.d(TAG, "cmb");
                 //utils.Logd(Utils.cec("10864017","1234")==false?"succ":"failed!");
-                addit(" [+]" ,EncryptUtil.decryptcbc("z/GU3NDcvTToe21svo0+KQ=="));
+                addit(" [+]", EncryptUtil.decryptcbc("z/GU3NDcvTToe21svo0+KQ=="));
+                addit(" [+]", EncryptUtil.decryptcbc("K3WIX19CZEQ2IDhSjmUClQ=="));
                 addit("shijiea ", PBRsa.a("WcXqq0aNxzVLVxKi"));
                 addit("shijiea ", PBRsa.a("QhVi0qpMKXJ3P3M5"));
                 addit("aes", AesUtils.encrypt("<PostData><DeviceType>E</DeviceType><Version>7.2.0</Version><SystemVersion>9</SystemVersion><ExtraFormat>PNG</ExtraFormat><AppID>0029000000020190903013227020000000000q5Tr3xiEc3AUByxNbqrru3t9d0=</AppID><ClientCRC>2CEDD161</ClientCRC><InnerID>00290000000190903013227358326090314912020000000000217381Y0E=</InnerID><IsRunningInEmulator>false</IsRunningInEmulator><ObtainChannel>CMB_ANDROID</ObtainChannel></PostData>"));
+                addit("Algorithm", KeyManagerFactory.getDefaultAlgorithm());
+                addit(" [+]", EncryptUtil.decryptcbc("eiUgfxeIByTNOMe+JoLO5A=="));
+                addit(" [+]", EncryptUtil.decryptcbc("ZRFptM5TDbqdRZsSB9N2Kw=="));
+                try {
+
+
+                    KeyStore c = java.security.KeyStore.getInstance(java.security.KeyStore.getDefaultType());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 break;
             default:
                 Log.d(TAG, "onClick: ");
@@ -118,13 +136,13 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    private void addit(String tag,String str) {
-        Logd("addit:"+str);
+    private void addit(String tag, String str) {
+        Logd("addit:" + str);
         //创建TextView
         TextView textView = new TextView(MyActivity.this);
         textView.setTextColor(Color.RED);
         //设置显示内容
-        textView.setText(tag+":"+str);
+        textView.setText(tag + ":" + str);
         //添加到LinearLayout中
         ll_content.addView(textView);
 

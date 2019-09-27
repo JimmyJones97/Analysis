@@ -17,6 +17,14 @@ public class EncryptUtil {
     static public native String decryptcbc(String str);
 
     static {
+        /**
+         *
+         *  假面
+         *  <P>
+         *
+         *  </P>
+         *
+         */
         System.loadLibrary("wb");
         //System.loadLibrary(StringObfuse.decode("140F"));
     }
