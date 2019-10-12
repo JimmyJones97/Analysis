@@ -35,7 +35,7 @@ HOOK_DEF(int, luaL_loadstring, slua::lua_State *L, const char *s) {
 
 void x86_spec() {
     char *error;
-    void *handle = dlopen("/data/data/com.tencent.tmgp.pubgmhd/lib/libUE4.so", RTLD_LAZY);
+    void *handle = dlopen("/data/data/me.ele/lib/libtnet-3.1.14.so", RTLD_LAZY);
     if (!handle) {
         LOGD("dlopen: -->%s \n", dlerror());
         //exit(EXIT_FAILURE);

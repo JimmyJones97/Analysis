@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.pwd61.analysis.Detour.NetTools.monitor;
 import com.example.pwd61.analysis.Detour.fuckApp.JD_anatomy;
 import com.example.pwd61.analysis.Detour.fuckApp.Zhaoshang;
+import com.example.pwd61.analysis.Detour.fuckApp.eleme;
 import com.example.pwd61.analysis.Detour.fuckApp.ilongyuan;
 import com.example.pwd61.analysis.Detour.fuckApp.neteaseMail;
 import com.example.pwd61.analysis.Detour.fuckApp.pubg;
@@ -40,6 +41,9 @@ public class LetMeCrackU implements IXposedHookLoadPackage {
         else if (lpparam.packageName.equals("com.yeecall.app")) {
             Log.w(TAG, "let explorer yee");
             yeecall.doHook(lpparam);
+        }else if (lpparam.packageName.equals("me.ele")) {
+            Log.w(TAG, "let explorer eleme");
+            eleme.doHook(lpparam);
         }else {
             Log.w(TAG, "Load package:" + lpparam.packageName + ",process:" + lpparam.processName);
         }

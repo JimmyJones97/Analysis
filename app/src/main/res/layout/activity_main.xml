@@ -87,8 +87,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/Test1"
-        android:layout_toEndOf="@id/status"
         android:layout_marginStart="5dp"
+        android:layout_toEndOf="@id/status"
         android:inputType="text"
         android:text="@string/inputedit" />
 
@@ -96,8 +96,7 @@
         android:id="@+id/logtxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/inputEdit"
-            >
+        android:layout_below="@id/inputEdit">
 
         <LinearLayout
             android:id="@+id/ll_content"
@@ -109,10 +108,10 @@
     </ScrollView>
 
     <!--<FrameLayout-->
-        <!--android:id="@+id/frame_content"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:layout_alignParentBottom="true">-->
+    <!--android:id="@+id/frame_content"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="200dp"-->
+    <!--android:layout_alignParentBottom="true">-->
 
     <!--</FrameLayout>-->
     <!--<com.example.pwd61.analysis.views.PlasmaView-->
