@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.4.1)
 project(native_lib)
 
+#set(LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/out/library)
+#set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR}/out/build)
+
+
+
 #子目录
 add_subdirectory(slua)
 add_subdirectory(debugger)
@@ -139,3 +144,12 @@ target_include_directories(sss
         PRIVATE
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/yeecall/>)
 target_link_libraries(sss Utils ${log-lib})
+
+add_library(pltfun SHARED plt_hook_target.cpp)
+target_include_directories(pltfun PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/)
+add_executable(plt_hook_target   plt_main.cpp)
+target_include_directories(plt_hook_target  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/)
+target_link_libraries(plt_hook_target PUBLIC pltfun)
+#add_executable(plt_hook_ninja plt_hook_ninja.cpp)
+#target_link_libraries(plt_hook_ninja Utils ${log-lib})
+#set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../build)
