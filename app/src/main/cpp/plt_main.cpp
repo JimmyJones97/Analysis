@@ -23,7 +23,7 @@ void hook()
     uintptr_t  base_addr = 0;
     uintptr_t  addr;
 
-    //find base address of libtest.so
+    //find base address of libpltfun.so
     if(NULL == (fp = fopen("/proc/self/maps", "r"))) return;
     while(fgets(line, sizeof(line), fp))
     {

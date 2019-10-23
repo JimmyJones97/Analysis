@@ -24,6 +24,8 @@
 
 #include <cstring>
 #include <cstdint>
+#include "CydiaSubstrate.h"
+
 template <typename Type_>
 _disused static _finline void MSWrite(uint8_t *&buffer, Type_ value) {
     *reinterpret_cast<Type_ *>(buffer) = value;
