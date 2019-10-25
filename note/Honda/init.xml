@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<car language="en">Honda</car>
+	<car language="cn">本田</car>
+	<car language="es">Honda</car>
+	<car language="de">Honda</car>
+	<car language="fr">Honda</car>
+	<car language="ru">Honda</car>
+	<car language="hk">本田</car>
+	<car language="jp">Honda</car>
+	<car language="pl">Honda</car>
+	<car language="pt">Honda</car>
+	<car language="kr">Honda</car>
+	<car language="nl">Honda</car>
+	<car language="se">Honda</car>
+	<car language="it">Honda</car>
+	<car language="tr">Honda</car>
+	<car language="th">Honda</car>
+	<version>V6.20</version>
+	<date>2019.08.30</date>
+	<img_ver>30</img_ver>
+	<supportEV>1</supportEV>
+	<function>2</function>
+</root>
+

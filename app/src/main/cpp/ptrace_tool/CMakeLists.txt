@@ -1,6 +1,6 @@
 project(ptrace_tool)
 
-file(GLOB SRC_SUB ${CMAKE_CURRENT_SOURCE_DIR}/*.c)
+file(GLOB SRC_SUB ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 #add_library(${PROJECT_NAME} STATIC ${SRC_SUB})
 #add_library(${PROJECT_NAME}  SHARED  ${SRC_SUB})
