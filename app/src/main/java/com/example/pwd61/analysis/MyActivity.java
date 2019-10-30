@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.pwd61.analysis.Detour.verfiy.ByteUtil;
+import com.example.pwd61.analysis.Utils.FileUtils;
 import com.example.pwd61.analysis.Utils.utils;
 import com.example.pwd61.analysis.app.Yeecall;
 import com.example.pwd61.analysis.app.cmb.AesUtils;
@@ -37,6 +39,8 @@ import javax.net.ssl.KeyManagerFactory;
 import cmb.pb.shield.whitebox.EncryptUtil;
 
 import static com.example.pwd61.analysis.Utils.utils.Logd;
+import static javax.crypto.Cipher.DECRYPT_MODE;
+import static javax.crypto.Cipher.ENCRYPT_MODE;
 
 
 public class MyActivity extends AppCompatActivity implements View.OnClickListener {
@@ -103,6 +107,12 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.Test2:
                 Log.d(TAG, "测试2");
+                Log.d(TAG, "免密提取8.0");
+                addit("Doge", jiemi(ReadUserInfo()));
+                addit("doge2", jiemi("D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC53007889249D691E7011503BD1688DB6D0D38FB74F25F1579E0A6584E1E878E8A0CFEF99F0C6BF55B528EAEA49A99C4D5A46DBFF483988CFBDA0D3592E238D0B84CEBAF0B83A05F07127048338E7220ECF96C6ADC7E5F468FEBB9A2C53F573F507DF1FD42C3E902718F2E3FC1208159DD75BE2DA94A2BBCBBE9C1FA603B35FF774E6A79B4C8A4DDCA54020EC65A1AAB99144D51F842BDDBF772FE0673C704BDE5710E35D41541A1CD132DB4D742DDB40F5516DACFCBF978C00F3BC39CAF3A4353DA2C1DBE7CB43DA4E0000B9277E428D40C692A5CB7739DCBED473858556146FFF92C7"));
+                addit("pin", new String(ByteUtil.parseHexStr2Byte("616c696b6169353230")));
+                addit("pin", new String(ByteUtil.parseHexStr2Byte("313136393436363237326c696b756e")));
+                addit("unencr", new String(unencry("D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC53007889249D691E7011503BD1688DB6D0D38FB74F25F1579E0A6584E1E878E8A0CFEF99F0C6BF55B528EAEA49A99C4D5A46DBFF483988CFBDA0D3592E238D0B84CEBAF0B83A05F07127048338E7220ECF96C6ADC7E5F468FEBB9A2C53F573F507DF1FD42C3E902718F2E3FC1208159DD75BE2DA94A2BBCBBE9C1FA603B35FF774E6A79B4C8A4DDCA54020EC65A1AAB99144D51F842BDDBF772FE0673C704BDE5710E35D41541A1CD132DB4D742DDB40F5516DACFCBF978C00F3BC39CAF3A4353DA2C1DBE7CB43DA4E0000B9277E428D40C692A5CB7739DCBED473858556146FFF92C7")));
                 break;
             case R.id.ctf:
                 Log.d(TAG, "ctf");
@@ -143,6 +153,8 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         textView.setTextColor(Color.RED);
         //设置显示内容
         textView.setText(tag + ":" + str);
+        textView.setEnabled(true);
+
         //添加到LinearLayout中
         ll_content.addView(textView);
 
@@ -205,4 +217,44 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
             out.write(buffer, 0, read);
         }
     }
+
+    private String ReadUserInfo() {
+//        FileUtils.readFileFromSDCard("/sdcard/")
+//        return "5866D577AC37B6B69033D9F915127CA15909CE8C449628484D87E00A57763824B0D86827AB6FAD64E154C50A4EF3F4A6400AFBE3594018FC492EC23FA822370BF8D48663913BA5408D89D101B06885E8F61A70A9806A8BB1514E49DACA20DF4687AE3BA5A0761646FBEB4E34F6D567F483309A90FC288DE3BC9F91206947187419BB7C4A13CFF802DDC2C2BFB6DFF40B3B18DD401D87F444D6B1212836C21709E2D1E9DAC79DD6BB0A351DD0B51CFE20075CF9603972722E3674C11C42E15926D477D4864F54F6E2A2AE24CF0CFB441FF367B343E675C53DACC4105A33E3C8C34DC7DCE5A6A060810727C00625A6D26F15262921FBA4A6AC9BBFF8944BE955E8324E03D20709E1D869A1B9D416F498EB4C2F2E8BD77BAAD42F21887FD73D8F5591440BF8355C07C0F0BFE74D4042D904";
+//        return "D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC53007889249D691E7011503BD1688DB6D0D38FB74F25F1579E0A6584E1E878E8A0CFEF99F0C6BF55B528EAEA49A99C4D5A46DBFF483988CFBDA0D3592E238D0B84CEBAF0B83A05F07127048338E7220ECF96C6ADC7E5F468FEBB9A2C53F573F507DF1FD42C3E902718F2E3FC1208159DD75BE2DA94A2BBCBBE9C1FA603B35FF774E6A79B4C8A4DDCA54020EC65A1AAB99144D51F842BDDBF772FE0673C704BDE5710E35D41541A1CD132DB4D742DDB40F5516DACFCBF978C00F3BC39CAF3A4353DA2C1DBE7CB43DA4E0000B9277E428D40C692A5CB7739DCBED473858556146FFF92C7";
+        return "D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC530078B74EF0E2AE183832D4B05D15455CE3AEE61ED0204E4EC4DF613910C69ED0F1701DCD095DD14A4210D4440A390D1EB8CFBCE779D3F6EB1EF0C0056030C9DF0C6D587E67ADD847C1E42A91AADAE8B02D81DC0C4A3AB789C97ACCA2EBA0F5923EB38987DFC6A4984AB8499CCF1BC550FB9B88962B7E97A8FAC391DA79578B024F0FD0D3C2FCDFF71CF3BC91E2509153F20843E19F72D63AE0A2193ED3CE7E2414B4FDB382B9CE41D1781755F422B9CB7020ED2737992F30F4A5D480F2EA5121FFFAC075AC01A42352A117FF62973140A446";
+    }
+
+    private String jiemi(String str) {
+        try {
+            return aesUnEnc("@w#a$q&ejuak", unencry(str));
+
+        } catch (Throwable tb) {
+            tb.printStackTrace();
+        }
+        return "";
+    }
+
+    public final byte[] unencry(java.lang.String str) {
+        int length = str.length() / 2;
+        byte[] bArr = new byte[length];
+        for (int i = 0; i < length; i++) {
+            bArr[i] = java.lang.Integer.valueOf(str.substring(i * 2, (i * 2) + 2), 16).byteValue();
+        }
+        return bArr;
+    }
+
+    private static byte[] initkey(java.lang.String str) throws java.lang.Exception {
+
+        return new javax.crypto.spec.SecretKeySpec(javax.crypto.SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(new javax.crypto.spec.PBEKeySpec(str.toCharArray(), "!q@w#e$r%t^y#n@v".getBytes(), 10, 128)).getEncoded(), "AES").getEncoded();
+    }
+
+    static java.lang.String aesUnEnc(String str, byte[] bArr) throws java.lang.Throwable {
+        javax.crypto.spec.SecretKeySpec secretKeySpec = new javax.crypto.spec.SecretKeySpec(initkey(str), "AES");
+        javax.crypto.Cipher instance = javax.crypto.Cipher.getInstance("AES/CBC/PKCS5Padding");
+        instance.init(DECRYPT_MODE, secretKeySpec, new javax.crypto.spec.IvParameterSpec("1653678145712191".getBytes()));
+        return new java.lang.String(instance.doFinal(bArr));
+    }
+
+
 }

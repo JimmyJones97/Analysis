@@ -105,8 +105,39 @@ public class JD_anatomy {
 //                        JSONObject jsonObject = (JSONObject) param.args[0];
 //                        utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
                         String res = (String) param.getResult();
-                        dumpStack();
+//                        dumpStack();
                         utils.Log("UserInfoStoreUtil: toString:  str1:"   + (String) param.args[0] + "=>" + (String) param.args[1] + res);
+                    }
+                });
+        findAndHookMethod("jd.wjlogin_sdk.a.e", lpparam.classLoader,
+                "b",
+
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        JSONObject jsonObject = (JSONObject) param.args[0];
+//                        utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+                        byte[] res = ( byte[]) param.getResult();
+
+//                        dumpStack();
+                        utils.Log("getkety: toString:  str1:" + new String(res));
+                    }
+                });
+        findAndHookMethod("jd.wjlogin_sdk.a.b", lpparam.classLoader,
+                "b",
+                String.class,
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        JSONObject jsonObject = (JSONObject) param.args[0];
+//                        utils.Log("beforeHookedMethod: toString:  str1:" + jsonObject.toString());
+                        String res = ( String) param.getResult();
+
+//                        dumpStack();
+                        utils.Log("usrInfop: toString:  str1:"   + (String) param.args[0] + "=>" + (String) param.args[1] + res);
                     }
                 });
 
