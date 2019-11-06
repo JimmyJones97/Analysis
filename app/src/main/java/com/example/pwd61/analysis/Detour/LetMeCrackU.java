@@ -42,7 +42,7 @@ public class LetMeCrackU implements IXposedHookLoadPackage {
             Log.w(TAG, "let explorer yee");
             yeecall.doHook(lpparam);
         }else if (lpparam.packageName.equals("me.ele")) {
-            Log.w(TAG, "let explorer eleme");
+            Log.w(TAG, "let explorer 饿了么");
             eleme.doHook(lpparam);
         }else {
             Log.w(TAG, "Load package:" + lpparam.packageName + ",process:" + lpparam.processName);

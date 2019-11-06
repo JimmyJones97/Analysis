@@ -25,14 +25,17 @@ char *(*JIEMI)(void *a1, int offset);
 slua::lua_CFunction fnc_call;
 
 typedef slua::lua_State *(*Lua_STATE_FUNC)();
+
 Lua_STATE_FUNC lua_state_func;
 
 typedef int (*luaL_loadbufferx_def)(slua::lua_State *L, const char *buff, size_t sz,
                                     const char *name, const char *mode);
+
 luaL_loadbufferx_def lua_loadbuf_fnc;
 
-typedef int (*luaL_loadstring_def) (slua::lua_State *L, const char *s);
-luaL_loadstring_def  load_string;
+typedef int (*luaL_loadstring_def)(slua::lua_State *L, const char *s);
+
+luaL_loadstring_def load_string;
 //
 slua::lua_State *g_luastate;
 
@@ -47,18 +50,17 @@ HOOK_DEF(int, lua_loadbufer, slua::lua_State *L, const char *buff, size_t sz,
          const char *name, const char *mode) {
     char buffer[4096];
     int j = snprintf(buffer, 4095, "%s\n", buff);
-    LOGD("LOAD BUFFER.num%d",j);
+    LOGD("LOAD BUFFER.num%d", j);
     std::string tmp(buff);
     faklog(tmp);
     return orig_lua_loadbufer(L, buff, sz, name, mode);
 }
 
-HOOK_DEF(int,luaL_loadstring,slua::lua_State *L, const char *s)
-{
+HOOK_DEF(int, luaL_loadstring, slua::lua_State *L, const char *s) {
     //std::string tmpstr(s);
     //faklog(tmpstr);
-    write2file(s,"/sdcard/pubg.lua");
-    return orig_luaL_loadstring(L,s);
+    write2file(s, "/sdcard/pubg.lua");
+    return orig_luaL_loadstring(L, s);
 }
 
 void x86_spec() {
@@ -203,8 +205,8 @@ HOOK_DEF(void*, JNI_OnLoad, void *javaVM) {
         firstLoad = false;
     }
     LOGD("RegisterNatives addr: %p", nativeInterface->RegisterNatives);
-    pthread_t tid;
-    pthread_create(&tid, nullptr, decryptMSG, nullptr);
+//    pthread_t tid;
+//    pthread_create(&tid, nullptr, decryptMSG, nullptr);
     return orig_JNI_OnLoad(javaVM);
 }
 
@@ -246,7 +248,20 @@ void onSoLoaded(const char *name, void *handle) {
             isFirst = false;
         }
     }
+    if (strstr(name, "oo000oo") != nullptr) {
+        if (findSymbol("JNI_OnLoad", "liboo000oo.so", (unsigned long *) &symbol) == 0 && isFirst) {
+            LOGD("FIND JNI_ONLOAD FUCK IT ：%p", symbol);
+            MSHookFunction(symbol, (void *) new_JNI_OnLoad, (void **) &orig_JNI_OnLoad);
+            //MSHookFunction(symbol, (void *) new_jiemi, (void **) &orig_jiemi);
+            LOGD("HOOK 加密函数");
+        }
+
+        isFirst = false;
+    }
 }
+
+
+
 
 int findSymbol(const char *name, const char *libn,
                unsigned long *addr) {
@@ -285,11 +300,13 @@ void hook_main() {
     __system_property_get("ro.build.version.sdk", sdk_ver_str);
     int api_level = atoi(sdk_ver_str);
     hook_dlopen(api_level);
-    int a=rest();
+    int a = rest();
 }
-int rest(){
+
+int rest() {
     return 0;
 }
+
 void __attribute__((constructor)) init_so() {
     LOGD("into so hook module!!!");
     char abi[PATH_MAX] = "";

@@ -1,9 +1,12 @@
 package com.example.pwd61.analysis;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,10 +18,12 @@ import android.widget.TextView;
 
 import com.example.pwd61.analysis.Detour.verfiy.ByteUtil;
 import com.example.pwd61.analysis.Utils.FileUtils;
+import com.example.pwd61.analysis.Utils.injectJNI;
 import com.example.pwd61.analysis.Utils.utils;
 import com.example.pwd61.analysis.app.Yeecall;
 import com.example.pwd61.analysis.app.cmb.AesUtils;
 import com.example.pwd61.analysis.app.cmb.PBRsa;
+import com.example.pwd61.analysis.app.eleme.xdeviceinfo;
 import com.example.pwd61.analysis.app.yeecall.CipherProtocol;
 import com.example.pwd61.analysis.app.yeecall.HashUtils;
 import com.android.tencent.qq.qq.Utils;
@@ -27,12 +32,15 @@ import com.example.pwd61.analysis.app.yeecall.PreferencesImpl;
 import com.example.pwd61.analysis.app.yeecall.ZayhuPref;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.security.KeyStore;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.net.ssl.KeyManagerFactory;
 
@@ -104,6 +112,17 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.Test1:
                 Log.d(TAG, "测试1");
+                Log.d(TAG, "CALL ELE");
+                addit("[+]", injectJNI.inject_Jni_Onload());
+                java.lang.String[] sneer = xdeviceinfo.sneer(getApplicationContext(), "4f93e640-5c6f-4980-bd3d-c1256672a64d", "/eus/login/mobile_send_code{\"mobile\":\"13228093363\",\"latitude\":23.125265,\"longitude\":113.38116,\"via_audio\":false}", "a");
+                for (int i = 0; i < sneer.length; i++) {
+                    Log.d(TAG, "sneer[" + i + "]->:" + sneer[i]);
+                }
+                String b="/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAYAEADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD03Xdams7vyYZxHjG4t0XNWNMm1WO5L6jJH9kKgK2R94nj86z3tbO318wzF5YliOVkJkZh6Enk8dzyfc1qxa3ocloIvPiSJRs8qQbdoHGCD0oL66lvVbwWlg7qTvYbUx1yaj0MubDMspkm3HeScnNQS3lpeahbRR3URjRfM+8DkdqNFuIALvM0Y/ft/EKOo+pFrkzyXtpaQgLKG8xJD1Q4IyD9CR9CR3qfRL6a4E0ExLvC2DJn71UNdnt5b2GOKRBc9VcMMAe9VdK8T6TZb4JpkDqSDInzB6L6ivZnXs6oMsQB71z9nPc3WtyiO7fylIbaeQR6Yplwx1bWYomci32B1XBBOfUVJp0Edp4iuYkOFKDAJoHe4/WdKnmuoryywJ161NplndMHfUY4mLdF2jIoop2Cwk/hfR5x/wAeUaH1QYrM0rwtYRajcsYEkiQ7Nrdj1/rRRSsg5UTaj4YtBPHc2djAzLndGw4aq2h2LprTeZZrANmdhTHHt7UUUWQuVXH61HPba5DcxLJg4C7P4j0x71bsNNuJtS+3XiEHAZQTgqaKKLajtqf/2Q==";
+                byte[] decode = android.util.Base64.decode(b, 0);
+                Logd("sss:"+decode.length);
+                saveImageToGallery(android.graphics.BitmapFactory.decodeByteArray(decode, 0, decode.length));
+
                 break;
             case R.id.Test2:
                 Log.d(TAG, "测试2");
@@ -256,5 +275,45 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
         return new java.lang.String(instance.doFinal(bArr));
     }
 
+    public int saveImageToGallery(Bitmap bmp) {
+        //生成路径
+        String root = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String dirName = "erweima16";
+        File appDir = new File(root , dirName);
+        if (!appDir.exists()) {
+            appDir.mkdirs();
+        }
 
+        //文件名为时间
+        long timeStamp = System.currentTimeMillis();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String sd = sdf.format(new Date(timeStamp));
+        String fileName = sd + ".jpg";
+
+        //获取文件
+        File file = new File(appDir, fileName);
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            //通知系统相册刷新
+//            ImageActivity.this.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+//                    Uri.fromFile(new File(file.getPath()))));
+            return 2;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+    }
 }

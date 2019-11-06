@@ -141,6 +141,56 @@ public class JD_anatomy {
                     }
                 });
 
+        findAndHookMethod("com.jingdong.jdreact.plugin.network.ApiUrl", lpparam.classLoader,
+                "cookie",
+                String.class,
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        String res = ( String) param.getResult();
+                        utils.Log("ApiUrl-->>>>>"   + (String) param.args[0] + "=>" + (String) param.args[1] );
+                    }
+                });
+
+        findAndHookMethod("com.tencent.smtt.sdk.CookieManager", lpparam.classLoader,
+                "getCookie",
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+                        String res = ( String) param.getResult();
+                        utils.Log("ApiUrl-->>>>>"   + (String) param.args[0] + "=>"+res);
+                    }
+                });
+        findAndHookMethod("com.tencent.smtt.sdk.CookieManager", lpparam.classLoader,
+                "setCookie",
+                String.class,
+                String.class,
+                "com.tencent.smtt.sdk.ValueCallback",
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        String res = ( String) param.getResult();
+                        utils.Log("ApiUrl-->>>>>"   + (String) param.args[0] +",---->"+(String)param.args[1]+"=>" );
+                    }
+                });
+        findAndHookMethod("com.jingdong.common.web.WebDebug", lpparam.classLoader,
+                "log",
+                String.class,
+                String.class,
+
+                new XC_MethodHook() {
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        super.afterHookedMethod(param);
+//                        String res = ( String) param.getResult();
+                        utils.Log("log-->>>>>"   + (String) param.args[0] +",---->"+(String)param.args[1]+"=>" );
+                    }
+                });
     }
 
     static {
