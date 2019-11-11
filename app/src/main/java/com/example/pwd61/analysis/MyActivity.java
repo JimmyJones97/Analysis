@@ -118,9 +118,9 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 for (int i = 0; i < sneer.length; i++) {
                     Log.d(TAG, "sneer[" + i + "]->:" + sneer[i]);
                 }
-                String b="/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAYAEADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD03Xdams7vyYZxHjG4t0XNWNMm1WO5L6jJH9kKgK2R94nj86z3tbO318wzF5YliOVkJkZh6Enk8dzyfc1qxa3ocloIvPiSJRs8qQbdoHGCD0oL66lvVbwWlg7qTvYbUx1yaj0MubDMspkm3HeScnNQS3lpeahbRR3URjRfM+8DkdqNFuIALvM0Y/ft/EKOo+pFrkzyXtpaQgLKG8xJD1Q4IyD9CR9CR3qfRL6a4E0ExLvC2DJn71UNdnt5b2GOKRBc9VcMMAe9VdK8T6TZb4JpkDqSDInzB6L6ivZnXs6oMsQB71z9nPc3WtyiO7fylIbaeQR6Yplwx1bWYomci32B1XBBOfUVJp0Edp4iuYkOFKDAJoHe4/WdKnmuoryywJ161NplndMHfUY4mLdF2jIoop2Cwk/hfR5x/wAeUaH1QYrM0rwtYRajcsYEkiQ7Nrdj1/rRRSsg5UTaj4YtBPHc2djAzLndGw4aq2h2LprTeZZrANmdhTHHt7UUUWQuVXH61HPba5DcxLJg4C7P4j0x71bsNNuJtS+3XiEHAZQTgqaKKLajtqf/2Q==";
+                String b = "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAYAEADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD03Xdams7vyYZxHjG4t0XNWNMm1WO5L6jJH9kKgK2R94nj86z3tbO318wzF5YliOVkJkZh6Enk8dzyfc1qxa3ocloIvPiSJRs8qQbdoHGCD0oL66lvVbwWlg7qTvYbUx1yaj0MubDMspkm3HeScnNQS3lpeahbRR3URjRfM+8DkdqNFuIALvM0Y/ft/EKOo+pFrkzyXtpaQgLKG8xJD1Q4IyD9CR9CR3qfRL6a4E0ExLvC2DJn71UNdnt5b2GOKRBc9VcMMAe9VdK8T6TZb4JpkDqSDInzB6L6ivZnXs6oMsQB71z9nPc3WtyiO7fylIbaeQR6Yplwx1bWYomci32B1XBBOfUVJp0Edp4iuYkOFKDAJoHe4/WdKnmuoryywJ161NplndMHfUY4mLdF2jIoop2Cwk/hfR5x/wAeUaH1QYrM0rwtYRajcsYEkiQ7Nrdj1/rRRSsg5UTaj4YtBPHc2djAzLndGw4aq2h2LprTeZZrANmdhTHHt7UUUWQuVXH61HPba5DcxLJg4C7P4j0x71bsNNuJtS+3XiEHAZQTgqaKKLajtqf/2Q==";
                 byte[] decode = android.util.Base64.decode(b, 0);
-                Logd("sss:"+decode.length);
+                Logd("sss:" + decode.length);
                 saveImageToGallery(android.graphics.BitmapFactory.decodeByteArray(decode, 0, decode.length));
 
                 break;
@@ -132,6 +132,9 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 addit("pin", new String(ByteUtil.parseHexStr2Byte("616c696b6169353230")));
                 addit("pin", new String(ByteUtil.parseHexStr2Byte("313136393436363237326c696b756e")));
                 addit("unencr", new String(unencry("D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC53007889249D691E7011503BD1688DB6D0D38FB74F25F1579E0A6584E1E878E8A0CFEF99F0C6BF55B528EAEA49A99C4D5A46DBFF483988CFBDA0D3592E238D0B84CEBAF0B83A05F07127048338E7220ECF96C6ADC7E5F468FEBB9A2C53F573F507DF1FD42C3E902718F2E3FC1208159DD75BE2DA94A2BBCBBE9C1FA603B35FF774E6A79B4C8A4DDCA54020EC65A1AAB99144D51F842BDDBF772FE0673C704BDE5710E35D41541A1CD132DB4D742DDB40F5516DACFCBF978C00F3BC39CAF3A4353DA2C1DBE7CB43DA4E0000B9277E428D40C692A5CB7739DCBED473858556146FFF92C7")));
+                addit("unencr", Integer.toString(unencry("D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC53007889249D691E7011503BD1688DB6D0D38FB74F25F1579E0A6584E1E878E8A0CFEF99F0C6BF55B528EAEA49A99C4D5A46DBFF483988CFBDA0D3592E238D0B84CEBAF0B83A05F07127048338E7220ECF96C6ADC7E5F468FEBB9A2C53F573F507DF1FD42C3E902718F2E3FC1208159DD75BE2DA94A2BBCBBE9C1FA603B35FF774E6A79B4C8A4DDCA54020EC65A1AAB99144D51F842BDDBF772FE0673C704BDE5710E35D41541A1CD132DB4D742DDB40F5516DACFCBF978C00F3BC39CAF3A4353DA2C1DBE7CB43DA4E0000B9277E428D40C692A5CB7739DCBED473858556146FFF92C7").length));
+                addit("unencr", Integer.toString("D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC53007889249D691E7011503BD1688DB6D0D38FB74F25F1579E0A6584E1E878E8A0CFEF99F0C6BF55B528EAEA49A99C4D5A46DBFF483988CFBDA0D3592E238D0B84CEBAF0B83A05F07127048338E7220ECF96C6ADC7E5F468FEBB9A2C53F573F507DF1FD42C3E902718F2E3FC1208159DD75BE2DA94A2BBCBBE9C1FA603B35FF774E6A79B4C8A4DDCA54020EC65A1AAB99144D51F842BDDBF772FE0673C704BDE5710E35D41541A1CD132DB4D742DDB40F5516DACFCBF978C00F3BC39CAF3A4353DA2C1DBE7CB43DA4E0000B9277E428D40C692A5CB7739DCBED473858556146FFF92C7".length()));
+                addit("cq", bytesToHexString(unencry("D68DBFF8A8E300A855F10E79F79777B8BA5F46DC38646BD2FE0762B9AC53007889249D691E7011503BD1688DB6D0D38FB74F25F1579E0A6584E1E878E8A0CFEF99F0C6BF55B528EAEA49A99C4D5A46DBFF483988CFBDA0D3592E238D0B84CEBAF0B83A05F07127048338E7220ECF96C6ADC7E5F468FEBB9A2C53F573F507DF1FD42C3E902718F2E3FC1208159DD75BE2DA94A2BBCBBE9C1FA603B35FF774E6A79B4C8A4DDCA54020EC65A1AAB99144D51F842BDDBF772FE0673C704BDE5710E35D41541A1CD132DB4D742DDB40F5516DACFCBF978C00F3BC39CAF3A4353DA2C1DBE7CB43DA4E0000B9277E428D40C692A5CB7739DCBED473858556146FFF92C7")));
                 break;
             case R.id.ctf:
                 Log.d(TAG, "ctf");
@@ -264,8 +267,12 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     }
 
     private static byte[] initkey(java.lang.String str) throws java.lang.Exception {
-
-        return new javax.crypto.spec.SecretKeySpec(javax.crypto.SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(new javax.crypto.spec.PBEKeySpec(str.toCharArray(), "!q@w#e$r%t^y#n@v".getBytes(), 10, 128)).getEncoded(), "AES").getEncoded();
+        return new javax.crypto.spec.SecretKeySpec(javax.crypto.SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1").generateSecret(
+                new javax.crypto.spec.PBEKeySpec(str.toCharArray(),
+                "!q@w#e$r%t^y#n@v".getBytes(),
+                10,
+                128)).getEncoded(),
+                "AES").getEncoded();
     }
 
     static java.lang.String aesUnEnc(String str, byte[] bArr) throws java.lang.Throwable {
@@ -278,15 +285,15 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
     public int saveImageToGallery(Bitmap bmp) {
         //生成路径
         String root = Environment.getExternalStorageDirectory().getAbsolutePath();
-        String dirName = "erweima16";
-        File appDir = new File(root , dirName);
+        String dirName = "fuck";
+        File appDir = new File(root, dirName);
         if (!appDir.exists()) {
             appDir.mkdirs();
         }
 
         //文件名为时间
         long timeStamp = System.currentTimeMillis();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sd = sdf.format(new Date(timeStamp));
         String fileName = sd + ".jpg";
 
@@ -315,5 +322,32 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
             }
         }
         return -1;
+    }
+    /*
+            *Convert
+    byte[] to
+    hex string.这里我们可以将byte转换成int，然后利用Integer.toHexString(int)来转换成16进制字符串。
+            *
+    @param
+    src
+    byte[] data
+ *@return
+    hex string
+ */
+
+    public static String bytesToHexString(byte[] src) {
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (int i = 0; i < src.length; i++) {
+            int v = src[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
     }
 }
