@@ -7,7 +7,7 @@ extern "C"
 {
 #endif
 
-int inject_remote_process(pid_t target_pid, const char *library_path, const char *function_name,
+int writecode_to_targetproc(pid_t target_pid, const char *library_path, const char *function_name,
                           void *param, size_t param_size);
 
 int find_pid_of(const char *process_name);

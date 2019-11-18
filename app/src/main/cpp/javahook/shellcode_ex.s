@@ -14,6 +14,8 @@ _start:
    swi  #0                           @ invoke syscall
 
 _exit:
+    /* syscall exit(int status) */
+   mov r0, #0                       /* status := 0 */
    mov r7, #1                       @ exit syscall
    swi 0                            @ invoke syscall
 

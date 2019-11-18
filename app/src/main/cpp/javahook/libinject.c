@@ -51,7 +51,7 @@ const char *linker_path = "/system/bin/linker";
 #define DEBUG_PRINT(format, args...) \
         LOGD(format, ##args)
 #else
-#define DEBUG_PRINT(format,args...) \
+#define DEBUG_PRINT(format, args...) \
         printf(format,##args)
 #endif
 
@@ -266,7 +266,8 @@ void *get_remote_addr(pid_t target_pid, const char *module_name, void *local_add
     local_handle = get_module_base(-1, module_name);
     remote_handle = get_module_base(target_pid, module_name);
 
-    DEBUG_PRINT("[+] get_remote_addr: local[%x], remote[%x]\n", local_handle, remote_handle);
+    DEBUG_PRINT("[+] get_remote_addr:module_name[%s], local[%x], remote[%x]\n", module_name,
+                local_handle, remote_handle);
 
     return (void *) ((uint32_t) local_addr + (uint32_t) remote_handle - (uint32_t) local_handle);
 }
@@ -312,8 +313,17 @@ int find_pid_of(const char *process_name) {
 }
 
 
-int inject_remote_process(pid_t target_pid, const char *library_path, const char *function_name,
-                          void *param, size_t param_size) {
+/* write the assembler code into target proc,
+ * and invoke it to execute
+ */
+int writecode_to_targetproc(
+        pid_t target_pid, // target process pid
+        const char *library_path, // the path of .so that will be
+        // upload to target process
+        const char *function_name, // .so init fucntion e.g. hook_init
+        void *param, // the parameters of init function
+        size_t param_size) // number of parameters
+{
     int ret = -1;
     void *mmap_addr, *dlopen_addr, *dlsym_addr, *dlclose_addr;
     void *local_handle, *remote_handle, *dlhandle;
@@ -321,39 +331,34 @@ int inject_remote_process(pid_t target_pid, const char *library_path, const char
     uint8_t *dlopen_param1_ptr, *dlsym_param2_ptr, *saved_r0_pc_ptr, *inject_param_ptr, *remote_code_ptr, *local_code_ptr;
 
     struct pt_regs regs, original_regs;
-    extern uint32_t _dlopen_addr_s;
-    extern uint32_t _dlopen_param1_s;
-    extern uint32_t _dlopen_param2_s;
-    extern uint32_t _dlsym_addr_s;
-    extern uint32_t _dlsym_param2_s;
-    extern uint32_t _dlclose_addr_s;
-    extern uint32_t _inject_start_s;
-    extern uint32_t _inject_end_s;
-    extern uint32_t _inject_function_param_s;
-    extern uint32_t _saved_cpsr_s;
-    extern uint32_t _saved_r0_pc_s;
+
+    // extern global variable in the assembler code
+    extern uint32_t _dlopen_addr_s, _dlopen_param1_s, _dlopen_param2_s, \
+ _dlsym_addr_s, _dlsym_param2_s, _dlclose_addr_s, \
+ _inject_start_s, _inject_end_s, _inject_function_param_s, \
+ _saved_cpsr_s, _saved_r0_pc_s;
 
     uint32_t code_length;
 
     long parameters[10];
 
-    DEBUG_PRINT("[+] Injecting process: %d\n", target_pid);
-
+    // make target_pid as its child process and stop
     if (ptrace_attach(target_pid) == -1)
-        return EXIT_SUCCESS;
+        return -1;
 
+    // get the values of 18 registers from target_pid
     if (ptrace_getregs(target_pid, &regs) == -1)
         goto exit;
 
-    /* save original registers */
+    // save original registers
     memcpy(&original_regs, &regs, sizeof(regs));
 
+    // get mmap address from target_pid
+    // the mmap is the address of mmap in the cur process
     mmap_addr = get_remote_addr(target_pid, "/system/lib/libc.so", (void *) mmap);
-
     DEBUG_PRINT("[+] Remote mmap address: %x\n", mmap_addr);
-
-    /* call mmap */
-    parameters[0] = 0;    // addr
+    // set mmap parameters
+    parameters[0] = 0;  // addr
     parameters[1] = 0x4000; // size
     parameters[2] = PROT_READ | PROT_WRITE | PROT_EXEC;  // prot
     parameters[3] = MAP_ANONYMOUS | MAP_PRIVATE; // flags
@@ -361,32 +366,33 @@ int inject_remote_process(pid_t target_pid, const char *library_path, const char
     parameters[5] = 0; //offset
 
     DEBUG_PRINT("[+] Calling mmap in target process.\n");
-
+    // execute the mmap in target_pid
     if (ptrace_call(target_pid, (uint32_t) mmap_addr, parameters, 6, &regs) == -1)
         goto exit;
 
-
+    // get the return values of mmap <in r0>
     if (ptrace_getregs(target_pid, &regs) == -1)
         goto exit;
-
-
     DEBUG_PRINT("[+] Target process returned from mmap, return value=%x, pc=%x \n", regs.ARM_r0,
                 regs.ARM_pc);
 
+    // get the start address for assembler code
     map_base = (uint8_t *) regs.ARM_r0;
 
-    dlopen_addr = get_remote_addr(target_pid, linker_path, (void *) dlopen);
-    dlsym_addr = get_remote_addr(target_pid, linker_path, (void *) dlsym);
-    dlclose_addr = get_remote_addr(target_pid, linker_path, (void *) dlclose);
-
+    // get the address of dlopen, dlsym and dlclose in target process
+    dlopen_addr = get_remote_addr(target_pid, "/system/bin/linker", (void *) dlopen);
+    dlsym_addr = get_remote_addr(target_pid, "/system/bin/linker", (void *) dlsym);
+    dlclose_addr = get_remote_addr(target_pid, "/system/bin/linker", (void *) dlclose);
     DEBUG_PRINT("[+] Get imports: dlopen: %x, dlsym: %x, dlclose: %x\n", dlopen_addr, dlsym_addr,
                 dlclose_addr);
-
-
+    // set the start address for assembler code in target process
     remote_code_ptr = map_base + 0x3C00;
+
+    // set the start address for assembler code in cur process
     local_code_ptr = (uint8_t *) &_inject_start_s;
 
-
+    /// set global variable of assembler code
+    /// and these address is in the target process
     _dlopen_addr_s = (uint32_t) dlopen_addr;
     _dlsym_addr_s = (uint32_t) dlsym_addr;
     _dlclose_addr_s = (uint32_t) dlclose_addr;
@@ -394,49 +400,61 @@ int inject_remote_process(pid_t target_pid, const char *library_path, const char
     DEBUG_PRINT("[+] Inject code start: %x, end: %x\n", local_code_ptr, &_inject_end_s);
 
     code_length = (uint32_t) &_inject_end_s - (uint32_t) &_inject_start_s;
+
     dlopen_param1_ptr = local_code_ptr + code_length + 0x20;
     dlsym_param2_ptr = dlopen_param1_ptr + MAX_PATH;
     saved_r0_pc_ptr = dlsym_param2_ptr + MAX_PATH;
     inject_param_ptr = saved_r0_pc_ptr + MAX_PATH;
 
+    DEBUG_PRINT("[+] remote addres: dlopen param1:%x,local:%x,remote:%x\n", dlopen_param1_ptr,
+                local_code_ptr, remote_code_ptr);
 
-    /* dlopen parameter 1: library name */
+    /// save library path to assembler code global variable
     strcpy(dlopen_param1_ptr, library_path);
     _dlopen_param1_s = REMOTE_ADDR(dlopen_param1_ptr, local_code_ptr, remote_code_ptr);
     DEBUG_PRINT("[+] _dlopen_param1_s: %x\n", _dlopen_param1_s);
 
-    /* dlsym parameter 2: function name */
+
+    /// save function name to assembler code global variable
     strcpy(dlsym_param2_ptr, function_name);
     _dlsym_param2_s = REMOTE_ADDR(dlsym_param2_ptr, local_code_ptr, remote_code_ptr);
     DEBUG_PRINT("[+] _dlsym_param2_s: %x\n", _dlsym_param2_s);
 
-    /* saved cpsr */
+    /// save cpsr to assembler code global variable
     _saved_cpsr_s = original_regs.ARM_cpsr;
 
-    /* saved r0-pc */
+    // save r0-r15 to assembler code global variable
     memcpy(saved_r0_pc_ptr, &(original_regs.ARM_r0), 16 * 4); // r0 ~ r15
     _saved_r0_pc_s = REMOTE_ADDR(saved_r0_pc_ptr, local_code_ptr, remote_code_ptr);
     DEBUG_PRINT("[+] _saved_r0_pc_s: %x\n", _saved_r0_pc_s);
 
-    /* Inject function parameter */
+    // save function parameters to assembler code global variable
     memcpy(inject_param_ptr, param, param_size);
     _inject_function_param_s = REMOTE_ADDR(inject_param_ptr, local_code_ptr, remote_code_ptr);
     DEBUG_PRINT("[+] _inject_function_param_s: %x\n", _inject_function_param_s);
 
+    // write the assembler code into target process
+    // now the values of global variable is in the target process space
     DEBUG_PRINT("[+] Remote shellcode address: %x\n", remote_code_ptr);
     ptrace_writedata(target_pid, remote_code_ptr, local_code_ptr, 0x400);
 
+    ///恢复寄存器original状态
     memcpy(&regs, &original_regs, sizeof(regs));
+
+    // set sp and pc to the start address of assembler code
     regs.ARM_sp = (long) remote_code_ptr;
     regs.ARM_pc = (long) remote_code_ptr;
+
+    // set registers for target process
     ptrace_setregs(target_pid, &regs);
+
+    // make the target_pid is not a child process of cur process
+    // and make target_pid continue to running
     ptrace_detach(target_pid);
 
-    // inject succeeded
+    // now finish it successfully
     ret = 0;
 
     exit:
     return ret;
 }
-
-
