@@ -366,17 +366,17 @@ int writecode_to_targetproc(
     parameters[5] = 0; //offset
 
     DEBUG_PRINT("[+] Calling mmap in target process.\n");
-    // execute the mmap in target_pid
+    /// execute the mmap in target_pid
     if (ptrace_call(target_pid, (uint32_t) mmap_addr, parameters, 6, &regs) == -1)
         goto exit;
 
-    // get the return values of mmap <in r0>
+    /// get the return values of mmap <in r0>
     if (ptrace_getregs(target_pid, &regs) == -1)
         goto exit;
     DEBUG_PRINT("[+] Target process returned from mmap, return value=%x, pc=%x \n", regs.ARM_r0,
                 regs.ARM_pc);
 
-    // get the start address for assembler code
+    /// get the start address for assembler code
     map_base = (uint8_t *) regs.ARM_r0;
 
     // get the address of dlopen, dlsym and dlclose in target process
@@ -385,10 +385,10 @@ int writecode_to_targetproc(
     dlclose_addr = get_remote_addr(target_pid, "/system/bin/linker", (void *) dlclose);
     DEBUG_PRINT("[+] Get imports: dlopen: %x, dlsym: %x, dlclose: %x\n", dlopen_addr, dlsym_addr,
                 dlclose_addr);
-    // set the start address for assembler code in target process
+    /// set the start address for assembler code in target process
     remote_code_ptr = map_base + 0x3C00;
 
-    // set the start address for assembler code in cur process
+    /// set the start address for assembler code in cur process
     local_code_ptr = (uint8_t *) &_inject_start_s;
 
     /// set global variable of assembler code

@@ -20,21 +20,14 @@
 
 
 .data
- string: .asciz "fuck world!\n"       @ .asciz adds a null-byte to the end of the string
- after_string:
- .set size_of_string, after_string - string
- string2: .asciz "fuck fail!\n"       @ .asciz adds a null-byte to the end of the string
-  after_string1:
-  .set size_of_string, after_string1 - string2
-
 _inject_start_s:
 	@debug loop
 3:
 	@sub r1, r1, #0
 	@B 3b
     mov  r0, #1                       @ STDOUT
-    ldr  r1, addr_of_string         @ memory address of string
-    movs r2, #size_of_string          @ size of string
+    ldr  r1, _dlopen_param1_s         @ memory address of string
+    movs r2, #20         @ size of string
     mov  r7, #4                       @ write syscall
     swi  #0                           @ invoke syscall
 
@@ -55,7 +48,7 @@ _inject_start_s:
  
 	@call our function
 	ldr r0, _inject_function_param_s  @设置hook_init第一个参数
-        blx r3                            @执行hook_init
+    blx r3                            @执行hook_init
 	subs r0, r0, #0
 	beq 2f
  
@@ -67,11 +60,6 @@ _inject_start_s:
  
 2:
 	@restore context
-	mov  r0, #1                       @ STDOUT
-    ldr  r1, addr_of_string         @ memory address of string
-    movs r2, #size_of_string          @ size of string
-    mov  r7, #4                       @ write syscall
-    swi  #0                           @ invoke syscall
 	ldr r1, _saved_cpsr_s             @恢复CPSR
 	msr cpsr_cf, r1
 	ldr sp, _saved_r0_pc_s            @恢复寄存器r0-r15
@@ -106,8 +94,6 @@ _saved_cpsr_s:
  
 _saved_r0_pc_s:
 .word 0x11111111
- 
- 
 _inject_end_s:                     @代码结束地址
  
 .space 0x400, 0                    @代码段空间大小
