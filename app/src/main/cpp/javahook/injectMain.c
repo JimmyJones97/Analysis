@@ -24,12 +24,12 @@
 
 int main(int argc, char **argv) {
     pid_t target_pid;
-    target_pid = find_pid_of("/data/local/tmp/helloworld");
-    printf("[+] helloworld pid-> %d\n", target_pid);
-    if (writecode_to_targetproc(target_pid, "/system/lib/libtest.so", "java_hook_test",
+    target_pid = find_pid_of("com.Autel.maxi");
+    printf("[+] com.Autel.maxi pid-> %d\n", target_pid);
+    if (writecode_to_targetproc(target_pid, "/data/local/tmp/libtest.so", "hook_entry",
                               "I'm parameter!", strlen("I'm parameter!")) == 0)
-        LOGV("inject success");
+        LOGV("inject success\n");
     else
-        LOGV("inject wrong");
+        LOGV("inject wrong\n");
     return 0;
 }

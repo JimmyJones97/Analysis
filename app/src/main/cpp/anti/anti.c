@@ -15,9 +15,11 @@
 #include <sys/system_properties.h>
 #include <sys/inotify.h>
 #include <dirent.h>
+#include <ctype.h>
+#include <string.h>
 
 
-#define LOG_TAG "Hook"
+#define LOG_TAG "HOOK"
 #define LOGD(fmt, args...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, fmt, ##args)
 #ifdef win32
 #endif
@@ -731,7 +733,6 @@ int hook_entry(char *a){
 	{
         const char* err = dlerror();
 		LOGD("dlopen libHookUtil file error. %s", err);
-        
 		return 0;
 	}
     //原函数
