@@ -23,8 +23,8 @@ void __attribute__ ((constructor)) OnLoad() {
 #ifndef DEBUG
 //    libhook_log(NULL);
 #endif
-
-    LOGD("草泥马的 ");
+    pid_t  mypid=getpid();
+    LOGD("草泥马的 pid：%d",mypid);
     hooked = 1;
 //    hook();
 }

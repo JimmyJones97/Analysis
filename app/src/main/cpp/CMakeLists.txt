@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.4.1)
 project(native_lib)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
 
 #set(LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/out/library)
 #set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR}/out/build)
@@ -30,7 +32,9 @@ add_subdirectory(javahook)
 add_subdirectory(helloworld)
 add_subdirectory(HookUtil)
 add_subdirectory(anti)
+add_subdirectory(posion)
 add_subdirectory(inject)
+add_subdirectory(tools)
 #add_subdirectory(CVE_2019_13272)
 #add_subdirectory(chroot_cve)
 #add_subdirectory(fileless_so)
