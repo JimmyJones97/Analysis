@@ -1,0 +1,138 @@
+version: 0.7.{build}
+image: Visual Studio 2017
+clone_folder: c:\projects\lief
+
+configuration: Release
+
+#clone_depth: 3
+
+platform:
+- x86
+- x64
+
+#cache:
+#  - rang_cpp_color-prefix -> CMakeLists.txt
+#  - mbed_tls -> CMakeLists.txt
+#  - libjson-prefix -> CMakeLists.txt
+#  - easyloggingpp-prefix -> CMakeLists.txt
+#  - tests\YAMLCPP -> tests\CMakeLists.txt
+#  - tests\lief-samples -> tests\CMakeLists.txt
+#  - tests\catch -> tests\CMakeLists.txt
+#  - api\python\pybind11-prefix -> api\python\CMakeLists.txt
+
+environment:
+ LIEF_AUTOMATIC_BUILDS_KEY:
+    secure: TT7SXISIifq2/tf02n2ATgPj+Ky4Cjl3Fg44BAfyI4yRa4i87UAQIx5EFeV63+Xv2rhcU7JcMgl+An7QBrV6ofuQ9jxbuw+Gd1GqcCrAIyY=
+ LIEF_AUTOMATIC_BUILDS_IV:
+    secure: /S6Vbt3vEisoC81siFbkqOXQeVnwxLZZPMYp1r79G7h+HFjLlWUZSidxxpsAgHNE
+ matrix:
+    # Python 2.7
+    #- PYTHON_VERSION:   "2.7"
+    #  PYTHON32_PATH:    "C:\\Python27"
+    #  PYTHON32_INCLUDE: "C:\\Python27\\include"
+    #  PYTHON32_BINARY:  "C:\\Python27\\python.exe"
+    #  PYTHON32_LIBRARY: "C:\\Python27\\libs\\python27.lib"
+    #  PYTHON64_PATH:    "C:\\Python27-x64"
+    #  PYTHON64_INCLUDE: "C:\\Python27-x64\\include"
+    #  PYTHON64_BINARY:  "C:\\Python27-x64\\python.exe"
+    #  PYTHON64_LIBRARY: "C:\\Python27-x64\\libs\\python27.lib"
+
+
+    # Python 3.5
+    - PYTHON_VERSION:   "3.5"
+      PYTHON32_PATH:    "C:\\Python35"
+      PYTHON32_INCLUDE: "C:\\Python35\\include"
+      PYTHON32_BINARY:  "C:\\Python35\\python.exe"
+      PYTHON32_LIBRARY: "C:\\Python35\\libs\\python35.lib"
+      PYTHON64_PATH:    "C:\\Python35-x64"
+      PYTHON64_INCLUDE: "C:\\Python35-x64\\include"
+      PYTHON64_BINARY:  "C:\\Python35-x64\\python.exe"
+      PYTHON64_LIBRARY: "C:\\Python35-x64\\libs\\python35.lib"
+
+
+    ## Python 3.6
+    - PYTHON_VERSION:   "3.6"
+      PYTHON32_PATH:    "C:\\Python36"
+      PYTHON32_INCLUDE: "C:\\Python36\\include"
+      PYTHON32_BINARY:  "C:\\Python36\\python.exe"
+      PYTHON32_LIBRARY: "C:\\Python36\\libs\\python36.lib"
+      PYTHON64_PATH:    "C:\\Python36-x64"
+      PYTHON64_INCLUDE: "C:\\Python36-x64\\include"
+      PYTHON64_BINARY:  "C:\\Python36-x64\\python.exe"
+      PYTHON64_LIBRARY: "C:\\Python36-x64\\libs\\python36.lib"
+
+    # Python 3.7
+    - PYTHON_VERSION:   "3.7"
+      PYTHON32_PATH:    "C:\\Python37"
+      PYTHON32_INCLUDE: "C:\\Python37\\include"
+      PYTHON32_BINARY:  "C:\\Python37\\python.exe"
+      PYTHON32_LIBRARY: "C:\\Python37\\libs\\python37.lib"
+      PYTHON64_PATH:    "C:\\Python37-x64"
+      PYTHON64_INCLUDE: "C:\\Python37-x64\\include"
+      PYTHON64_BINARY:  "C:\\Python37-x64\\python.exe"
+      PYTHON64_LIBRARY: "C:\\Python37-x64\\libs\\python37.lib"
+
+    # Python 3.8
+    # Skip due to the following error:
+    # Fatal Python error : _PyInterpreterState_Get(): no current thread state
+    # - PYTHON_VERSION:   "3.8"
+    #   PYTHON32_PATH:    "C:\\Python38"
+    #   PYTHON32_INCLUDE: "C:\\Python38\\include"
+    #   PYTHON32_BINARY:  "C:\\Python38\\python.exe"
+    #   PYTHON32_LIBRARY: "C:\\Python38\\libs\\python38.lib"
+    #   PYTHON64_PATH:    "C:\\Python38-x64"
+    #   PYTHON64_INCLUDE: "C:\\Python38-x64\\include"
+    #   PYTHON64_BINARY:  "C:\\Python38-x64\\python.exe"
+    #   PYTHON64_LIBRARY: "C:\\Python38-x64\\libs\\python38.lib"
+
+matrix:
+  fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
+
+install:
+  - ps: if ($env:PLATFORM -eq "x64") { $env:CMAKE_ARCH = "x64" }
+
+  - ps: if ($env:PLATFORM -eq "x64") { $env:PYTHON_PATH    = $env:PYTHON64_PATH }
+  - ps: if ($env:PLATFORM -eq "x64") { $env:PYTHON_INCLUDE = $env:PYTHON64_INCLUDE }
+  - ps: if ($env:PLATFORM -eq "x64") { $env:PYTHON_BINARY  = $env:PYTHON64_BINARY }
+  - ps: if ($env:PLATFORM -eq "x64") { $env:PYTHON_LIBRARY = $env:PYTHON64_LIBRARY }
+
+  - ps: if ($env:PLATFORM -eq "x86") { $env:PYTHON_PATH    = $env:PYTHON32_PATH }
+  - ps: if ($env:PLATFORM -eq "x86") { $env:PYTHON_INCLUDE = $env:PYTHON32_INCLUDE }
+  - ps: if ($env:PLATFORM -eq "x86") { $env:PYTHON_BINARY  = $env:PYTHON32_BINARY }
+  - ps: if ($env:PLATFORM -eq "x86") { $env:PYTHON_LIBRARY = $env:PYTHON32_LIBRARY }
+  - set PATH=%PYTHON_PATH%;%PATH%
+
+  # Upgrade pip
+  - python.exe -m pip install --disable-pip-version-check --user --upgrade pip
+  - python.exe -m pip install --user wheel mako
+  - python.exe -m pip install --upgrade setuptools
+
+
+build_script:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - set MSBuildLogger="C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+  - python.exe .\setup.py --sdk --lief-test bdist_wheel && exit 0 # Ignore warnings...
+
+after_build:
+  - bash ./.github/deploy.sh
+
+artifacts:
+  - path: 'dist\*.whl'
+    name: python-wheel
+
+  - path: 'build\*.zip'
+    name: sdk
+
+deploy:
+  description: "LIEF version $(APPVEYOR_REPO_TAG_NAME)"
+  provider: GitHub
+  auth_token:
+    secure: FU9CGrZ1lm0VDHUZg6zvTL4tidluDvRegVUTehCRo2xgiOv6NZePi7TdSy5CsOdG
+  artifact: sdk;python-wheel
+  draft: false
+  prerelease: false
+  force_update: true
+  on:
+    appveyor_repo_tag: true # deploy on tag push only
+
+

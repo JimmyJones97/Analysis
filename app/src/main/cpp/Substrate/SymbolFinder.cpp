@@ -224,7 +224,7 @@ static symtab_t load_symtab(char *filename) {
 
 
 static int load_memmap(pid_t pid, struct mm *mm, int *nmmp) {
-    size_t buf_size = 0x40000;
+    size_t buf_size = 0x400000;
     char *p_buf = (char *) malloc(buf_size); // increase this if needed for larger "maps"
     char name[MAX_NAME_LEN] = {0};
     char *p;

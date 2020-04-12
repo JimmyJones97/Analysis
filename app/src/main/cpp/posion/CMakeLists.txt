@@ -1,5 +1,5 @@
-project(posion C )
+project(posion CXX )
 
 
 
-add_executable(${PROJECT_NAME} main.c)
+add_executable(${PROJECT_NAME} main.cpp)

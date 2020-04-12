@@ -16,7 +16,7 @@ void libinject_log(const char* log_tag);
 
 // INJECTLOG( "some message %d %d %d", 1, 2, 3 );
 #define INJECTLOG(F,...) \
-    if (_libinject_log) __android_log_print( ANDROID_LOG_DEBUG, _libinject_log_tag, F, ##__VA_ARGS__ )
+     __android_log_print( ANDROID_LOG_DEBUG, "fuck", F, ##__VA_ARGS__ )
 
 // Find pid for process
 pid_t libinject_find_pid_of(const char* process);
